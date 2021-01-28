@@ -23,20 +23,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiayuanyang.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="¶前言 在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：  This is the first document. Is this the first document?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://jiayuanyang.com/2020/11/23/hello-world/index.html">
+<meta property="og:title" content="文本特征提取（embedding）">
+<meta property="og:url" content="https://jiayuanyang.com/2021/01/28/%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%88embedding%EF%BC%89/index.html">
 <meta property="og:site_name" content="Migo&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="¶前言 在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：  This is the first document. Is this the first document?">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-23T07:56:38.631Z">
-<meta property="article:modified_time" content="2020-11-23T07:56:38.631Z">
+<meta property="article:published_time" content="2021-01-28T02:31:17.000Z">
+<meta property="article:modified_time" content="2021-01-28T12:18:11.806Z">
 <meta property="article:author" content="Migo">
+<meta property="article:tag" content="embedding">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jiayuanyang.com/2020/11/23/hello-world/">
+<link rel="canonical" href="https://jiayuanyang.com/2021/01/28/%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%88embedding%EF%BC%89/">
 
 
 <script class="page-configurations">
@@ -48,7 +49,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>Hello World | Migo's Blog</title>
+<title>文本特征提取（embedding） | Migo's Blog</title>
   
 
 
@@ -180,7 +181,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-tf-idf"><span class="nav-number">2.</span> <span class="nav-text">1. tf-idf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">scikit-learn实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -203,13 +204,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -254,7 +255,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiayuanyang.com/2020/11/23/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://jiayuanyang.com/2021/01/28/%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%88embedding%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/youshen-avatar.gif">
@@ -267,7 +268,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          文本特征提取（embedding）
         </h1>
 
         <div class="post-meta-container">
@@ -277,8 +278,18 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-11-23 15:56:38" itemprop="dateCreated datePublished" datetime="2020-11-23T15:56:38+08:00">2020-11-23</time>
+      <time title="创建时间：2021-01-28 10:31:17 / 修改时间：20:18:11" itemprop="dateCreated datePublished" datetime="2021-01-28T10:31:17+08:00">2021-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
     </span>
 
   
@@ -298,19 +309,46 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h1 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h1>
+<p>在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是<strong>词袋表征方法</strong>（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：</p>
+<blockquote>
+<p>This is the first document.<br>
+Is this the first document?</p>
+</blockquote>
+<a id="more"></a>
+<p>虽然两个句子表达的含义不同，但是通过BOW表征的向量确是相同的。为了解决该问题，需要加入位置顺序的信息，除了1-grams，还需要提取2-grams或者更高的grams特征：</p>
+<blockquote>
+<p>Bi-grams are cool!<br>
+[‘bi’, ‘grams’, ‘are’, ‘cool’, ‘bi grams’, ‘grams are’, ‘are cool’]</p>
+</blockquote>
+<p>但是在大型的语料库中，有许多词出现的频率非常高（例如：“的”, “是”，“你”，“我”），但是这些词包含的有用信息确很少，如果直接将语料库中统计的单词出现次数作为特征输入到模型中，出现多次但无用的词会在模型中降低出现次数虽少但是包含信息量很大的词的作用，比如某一专业领域的专有名词。为了解决这一问题，需要给不同的词以不同的权重，<strong>tf-idf</strong>便是一种计算权重的方法。</p>
+<h1 id="1-tf-idf"><a class="header-anchor" href="#1-tf-idf">¶</a>1. tf-idf</h1>
+<p>该方法最初用在信息检索（搜索引擎网页排序），后来被NLP领域借鉴用来做文本的embedding。<strong>tf-idf</strong>两部分的具体含义如下：</p>
+<p><strong>tf</strong>: term-frequency  词频<br>
+<strong>idf</strong>: inverse document-frequency  逆文本频率<br>
+$$tf-idf(t,d)=tf(t,d)\times idf(t)$$<br>
+$tf(t,d)$: 单词 $t$ 在指定文本 $d$ 中出现的次数（$t$在英文资料中其实是term的缩写，因为毕竟n-grams并不都是单词，但中文我也不知道怎样翻译合适😞)</p>
+<p>$idf(t)=log\frac{n}{df(t)}+1$<br>
+上式中，$n$表示语料库中文章的总数，$df(t)$表示语料库中包含单词$t$的文章个数。</p>
+<h2 id="scikit-learn实现"><a class="header-anchor" href="#scikit-learn实现">¶</a>scikit-learn实现</h2>
+<p>由于类<strong>TfidfVectorizer</strong>集合了<strong>CountVectorizer</strong>和<strong>TfidfTransformer</strong>两者的功能，所以直接使用<strong>TfidfVectorizer</strong>获得文本向量，具体如下所示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer = TfidfVectorizer()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer.fit_transform(corpus)</span><br><span class="line">&lt;4x9 sparse matrix of <span class="built_in">type</span> <span class="string">&#x27;&lt;... &#x27;</span>numpy.float64<span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="number">19</span> stored elements <span class="keyword">in</span> Compressed Sparse ... <span class="built_in">format</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>其实scikit-learn官网中给出了具体的例子计算tf-idf，过程很详细，链接见本文的参考<a href="#Reference">[1]</a>。</p>
+<p><strong>TfidfVectorizer</strong>类中有许多参数，个人觉得比较重要的如下：</p>
+<ul>
+<li>stop_words: 可以根据任务不同给定不同的停用词表</li>
+<li>ngram_range: 给定n-grams的取值范围</li>
+<li>max_df: 构建词表时，如果某个词的文本频率高于max_df就忽略该词</li>
+<li>min_df: 构建词表时，如果某个词的文本频率低于max_df就忽略该词</li>
+<li>vocabulary: 给定自定义的词表，这样会按照自定义词表的维度计算</li>
+<li>smooth_idf: 平滑处理，mooth_idf=True时，<br>
+$$idf(t)=log\frac{1+n}{1+df(t)}+1$$</li>
+<li>sublinear_tf: sublinear_tf=True时，用$1+log(tf)$替换$tf$</li>
+</ul>
+<p><strong>TfidfVectorizer</strong>类的定义如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sklearn</span>.<span class="title">feature_extraction</span>.<span class="title">text</span>.<span class="title">TfidfVectorizer</span>(<span class="params">*, <span class="built_in">input</span>=<span class="string">&#x27;content&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>, decode_error=<span class="string">&#x27;strict&#x27;</span>, strip_accents=<span class="literal">None</span>, lowercase=<span class="literal">True</span>, preprocessor=<span class="literal">None</span>, tokenizer=<span class="literal">None</span>, analyzer=<span class="string">&#x27;word&#x27;</span>, stop_words=<span class="literal">None</span>, token_pattern=<span class="string">&#x27;(?u)\b\w\w+\b&#x27;</span>, ngram_range=(<span class="params"><span class="number">1</span>, <span class="number">1</span></span>), max_df=<span class="number">1.0</span>, min_df=<span class="number">1</span>, max_features=<span class="literal">None</span>, vocabulary=<span class="literal">None</span>, binary=<span class="literal">False</span>, dtype=&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.float64&#x27;</span>&gt;, norm=<span class="string">&#x27;l2&#x27;</span>, use_idf=<span class="literal">True</span>, smooth_idf=<span class="literal">True</span>, sublinear_tf=<span class="literal">False</span></span>)</span></span><br></pre></td></tr></table></figure>
+<h1 id="Reference"><a class="header-anchor" href="#Reference">¶</a>Reference</h1>
+<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">[1]. scikit-learn中的Text feature extraction部分</a></p>
 
     </div>
 
@@ -330,16 +368,19 @@
 
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/embedding/" rel="tag"><i class="fa fa-tag"></i> embedding</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2020/11/23/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="prev" title="欢迎来到我的博客">
+                  <i class="fa fa-chevron-left"></i> 欢迎来到我的博客
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/11/23/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="next" title="欢迎来到我的博客">
-                  欢迎来到我的博客 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -381,8 +422,8 @@
 
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -429,6 +470,50 @@
 
 
 
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
