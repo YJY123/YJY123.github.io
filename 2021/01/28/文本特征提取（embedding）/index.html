@@ -31,7 +31,7 @@
 <meta property="og:description" content="¶前言 在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：  This is the first document. Is this the first document?">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-28T02:31:17.000Z">
-<meta property="article:modified_time" content="2021-01-28T12:18:11.806Z">
+<meta property="article:modified_time" content="2021-01-29T14:03:58.869Z">
 <meta property="article:author" content="Migo">
 <meta property="article:tag" content="embedding">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-tf-idf"><span class="nav-number">2.</span> <span class="nav-text">1. tf-idf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">scikit-learn实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-tf-idf"><span class="nav-number">2.</span> <span class="nav-text">1. tf-idf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">scikit-learn实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-word2vec"><span class="nav-number">3.</span> <span class="nav-text">2. word2vec</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-FastText"><span class="nav-number">4.</span> <span class="nav-text">3. FastText</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -197,20 +197,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -278,10 +278,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-28 10:31:17 / 修改时间：20:18:11" itemprop="dateCreated datePublished" datetime="2021-01-28T10:31:17+08:00">2021-01-28</time>
+      <time title="创建时间：2021-01-28 10:31:17" itemprop="dateCreated datePublished" datetime="2021-01-28T10:31:17+08:00">2021-01-28</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-29 22:03:58" itemprop="dateModified" datetime="2021-01-29T22:03:58+08:00">2021-01-29</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -347,6 +353,12 @@ $$idf(t)=log\frac{1+n}{1+df(t)}+1$$</li>
 </ul>
 <p><strong>TfidfVectorizer</strong>类的定义如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sklearn</span>.<span class="title">feature_extraction</span>.<span class="title">text</span>.<span class="title">TfidfVectorizer</span>(<span class="params">*, <span class="built_in">input</span>=<span class="string">&#x27;content&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>, decode_error=<span class="string">&#x27;strict&#x27;</span>, strip_accents=<span class="literal">None</span>, lowercase=<span class="literal">True</span>, preprocessor=<span class="literal">None</span>, tokenizer=<span class="literal">None</span>, analyzer=<span class="string">&#x27;word&#x27;</span>, stop_words=<span class="literal">None</span>, token_pattern=<span class="string">&#x27;(?u)\b\w\w+\b&#x27;</span>, ngram_range=(<span class="params"><span class="number">1</span>, <span class="number">1</span></span>), max_df=<span class="number">1.0</span>, min_df=<span class="number">1</span>, max_features=<span class="literal">None</span>, vocabulary=<span class="literal">None</span>, binary=<span class="literal">False</span>, dtype=&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.float64&#x27;</span>&gt;, norm=<span class="string">&#x27;l2&#x27;</span>, use_idf=<span class="literal">True</span>, smooth_idf=<span class="literal">True</span>, sublinear_tf=<span class="literal">False</span></span>)</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-word2vec"><a class="header-anchor" href="#2-word2vec">¶</a>2. word2vec</h1>
+<h1 id="3-FastText"><a class="header-anchor" href="#3-FastText">¶</a>3. FastText</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/FastText_Tutorial.ipynb">tutorial:</a><br>
+该方法的核心是单词的形态结构包含着单词含义的重要信息<br>
+FastText在syntactic tasks上表现要明显好于word2vec，特别是当训练语料库较小时；但是word2vec在semantic tasks上要比FastText略胜一筹，随着训练语料库的增大这种差异会变小。<br>
+FastText的训练时间大概是word2vec的1.5倍。</p>
 <h1 id="Reference"><a class="header-anchor" href="#Reference">¶</a>Reference</h1>
 <p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">[1]. scikit-learn中的Text feature extraction部分</a></p>
 
@@ -381,6 +393,9 @@ $$idf(t)=log\frac{1+n}{1+df(t)}+1$$</li>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/02/20/leetcode/" rel="next" title="leetcode">
+                  leetcode <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
