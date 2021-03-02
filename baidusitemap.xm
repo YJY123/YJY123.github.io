@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jiayuanyang.com/2021/02/20/leetcode/</loc>
-    <lastmod>2021-02-20</lastmod>
+    <lastmod>2021-03-02</lastmod>
   </url>
   <url>
     <loc>https://jiayuanyang.com/2021/01/28/%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%88embedding%EF%BC%89/</loc>
