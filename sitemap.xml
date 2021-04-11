@@ -4,21 +4,28 @@
   <url>
     <loc>https://jiayuanyang.com/2021/03/15/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-leetcode/</loc>
     
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jiayuanyang.com/2021/04/09/%E6%AF%8F%E6%97%A5%E8%AE%B0%E5%BD%95-%E8%BF%9B%E5%B1%95/</loc>
+    
+    <lastmod>2021-04-11</lastmod>
     
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/2021/02/20/leetcode/</loc>
     
-    <lastmod>2021-03-13</lastmod>
+    <lastmod>2021-04-09</lastmod>
     
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/2021/03/12/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%BE%85%E8%A7%A3%E5%86%B3%EF%BC%89/</loc>
     
-    <lastmod>2021-03-12</lastmod>
+    <lastmod>2021-04-01</lastmod>
     
   </url>
   
@@ -74,7 +81,7 @@
 
   <url>
     <loc>https://jiayuanyang.com/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,35 +89,42 @@
   
   <url>
     <loc>https://jiayuanyang.com/tags/leetcode/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://jiayuanyang.com/tags/job-preparation/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <loc>https://jiayuanyang.com/tags/%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/tags/embedding/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jiayuanyang.com/tags/job-preparation/</loc>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -119,21 +133,21 @@
   
   <url>
     <loc>https://jiayuanyang.com/categories/skill/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/categories/%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://jiayuanyang.com/categories/NLP/</loc>
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-04-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
