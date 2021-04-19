@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiayuanyang.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="前言 在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况： &gt; This is the first document. &gt; Is this the first document?">
+<meta name="description" content="前言在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：  This is the first document.Is this the first document?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文本特征提取（embedding）">
 <meta property="og:url" content="https://jiayuanyang.com/2021/01/28/%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%EF%BC%88embedding%EF%BC%89/index.html">
 <meta property="og:site_name" content="Migo&#39;s Blog">
-<meta property="og:description" content="前言 在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况： &gt; This is the first document. &gt; Is this the first document?">
+<meta property="og:description" content="前言在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是词袋表征方法（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：  This is the first document.Is this the first document?">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/04/15/4Zxu86QKELzXOWt.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/15/isWXjqcrg2OMANn.png">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/04/16/pBFLJ6yOkqljomQ.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/16/AL59glFzOYGyfK6.png">
 <meta property="article:published_time" content="2021-01-28T02:31:17.000Z">
-<meta property="article:modified_time" content="2021-04-18T09:05:44.948Z">
+<meta property="article:modified_time" content="2021-04-19T03:33:41.929Z">
 <meta property="article:author" content="Migo">
 <meta property="article:tag" content="embedding">
 <meta name="twitter:card" content="summary">
@@ -99,11 +99,7 @@
   </style>
 </noscript>
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -195,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">scikit-learn实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#word2vec"><span class="nav-number">2.</span> <span class="nav-text">2. word2vec</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">神经网络语言模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cbowcontinuous-bag-of-words"><span class="nav-number">2.2.</span> <span class="nav-text">CBOW(continuous bag-of-words)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Ehierarchical-softmax%E7%9A%84cbow%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于Hierarchical Softmax的CBOW模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Enegative-sampling%E7%9A%84cbow%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于Negative Sampling的CBOW模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#skip-gram"><span class="nav-number">2.3.</span> <span class="nav-text">skip-gram</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Ehierarchical-softmax%E7%9A%84skip-gram%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">基于Hierarchical Softmax的skip-gram模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Enegative-sampling%E7%9A%84skip-gram%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.2.</span> <span class="nav-text">基于Negative Sampling的skip-gram模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">2.4.</span> <span class="nav-text">训练小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%A2%91-2-gram"><span class="nav-number">2.4.1.</span> <span class="nav-text">高频 2-gram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%A2%91%E8%AF%8D%E6%9D%A1%E4%B8%8B%E9%87%87%E6%A0%B7"><span class="nav-number">2.4.2.</span> <span class="nav-text">高频词条下采样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.5.</span> <span class="nav-text">两种模型的适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fasttext"><span class="nav-number">3.</span> <span class="nav-text">3. FastText</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-1"><span class="nav-number">3.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E-word2vec-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">与 word2vec 的主要区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word2vec-%E5%92%8C-fasttext-%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.</span> <span class="nav-text">word2vec 和 FastText 的适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#glove"><span class="nav-number">4.</span> <span class="nav-text">4. GloVe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E7%BB%9F%E8%AE%A1"><span class="nav-number">4.1.</span> <span class="nav-text">共现矩阵的统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">4.2.</span> <span class="nav-text">目标函数的构造</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-tf-idf"><span class="nav-number">2.</span> <span class="nav-text">1. tf-idf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">scikit-learn实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-word2vec"><span class="nav-number">3.</span> <span class="nav-text">2. word2vec</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">神经网络语言模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-continuous-bag-of-words"><span class="nav-number">3.2.</span> <span class="nav-text">CBOW(continuous bag-of-words)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EHierarchical-Softmax%E7%9A%84CBOW%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">基于Hierarchical Softmax的CBOW模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENegative-Sampling%E7%9A%84CBOW%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">基于Negative Sampling的CBOW模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#skip-gram"><span class="nav-number">3.3.</span> <span class="nav-text">skip-gram</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EHierarchical-Softmax%E7%9A%84skip-gram%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">基于Hierarchical Softmax的skip-gram模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ENegative-Sampling%E7%9A%84skip-gram%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">基于Negative Sampling的skip-gram模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">3.4.</span> <span class="nav-text">训练小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%A2%91-2-gram"><span class="nav-number">3.4.1.</span> <span class="nav-text">高频 2-gram</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%A2%91%E8%AF%8D%E6%9D%A1%E4%B8%8B%E9%87%87%E6%A0%B7"><span class="nav-number">3.4.2.</span> <span class="nav-text">高频词条下采样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.5.</span> <span class="nav-text">两种模型的适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-FastText"><span class="nav-number">4.</span> <span class="nav-text">3. FastText</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-1"><span class="nav-number">4.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E-word2vec-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB"><span class="nav-number">4.2.</span> <span class="nav-text">与 word2vec 的主要区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word2vec-%E5%92%8C-FastText-%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.3.</span> <span class="nav-text">word2vec 和 FastText 的适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-GloVe"><span class="nav-number">5.</span> <span class="nav-text">4. GloVe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E7%BB%9F%E8%AE%A1"><span class="nav-number">5.1.</span> <span class="nav-text">共现矩阵的统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">5.2.</span> <span class="nav-text">目标函数的构造</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -300,7 +296,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-18 17:05:44" itemprop="dateModified" datetime="2021-04-18T17:05:44+08:00">2021-04-18</time>
+        <time title="修改时间：2021-04-19 11:33:41" itemprop="dateModified" datetime="2021-04-19T11:33:41+08:00">2021-04-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -329,111 +325,121 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="前言">前言</h1>
-<p>在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是<strong>词袋表征方法</strong>（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况： &gt; This is the first document. &gt; Is this the first document?</p>
-<a id="more"></a>
-<p>虽然两个句子表达的含义不同，但是通过BOW表征的向量确是相同的。为了解决该问题，需要加入位置顺序的信息，除了1-grams，还需要提取2-grams或者更高的grams特征： &gt; Bi-grams are cool! &gt; ['bi', 'grams', 'are', 'cool', 'bi grams', 'grams are', 'are cool']</p>
-<p>但是在大型的语料库中，有许多词出现的频率非常高（例如：“的”, “是”，“你”，“我”），但是这些词包含的有用信息确很少，如果直接将语料库中统计的单词出现次数作为特征输入到模型中，出现多次但无用的词会在模型中降低出现次数虽少但是包含信息量很大的词的作用，比如某一专业领域的专有名词。为了解决这一问题，需要给不同的词以不同的权重，<strong>tf-idf</strong>便是一种计算权重的方法。 # 1. tf-idf 该方法最初用在信息检索（搜索引擎网页排序），后来被NLP领域借鉴用来做文本的embedding。<strong>tf-idf</strong>两部分的具体含义如下：</p>
-<p><strong>tf</strong>: term-frequency 词频 <strong>idf</strong>: inverse document-frequency 逆文本频率 <span class="math display">\[tf-idf(t,d)=tf(t,d)\times idf(t)\]</span><br />
-<span class="math inline">\(tf(t,d)\)</span>: 单词 <span class="math inline">\(t\)</span> 在指定文本 <span class="math inline">\(d\)</span> 中出现的次数（<span class="math inline">\(t\)</span>在英文资料中其实是term的缩写，因为毕竟n-grams并不都是单词，但中文我也不知道怎样翻译合适:disappointed:)</p>
-<p><span class="math inline">\(idf(t)=log\frac{n}{df(t)}+1\)</span> 上式中，<span class="math inline">\(n\)</span>表示语料库中文章的总数，<span class="math inline">\(df(t)\)</span>表示语料库中包含单词<span class="math inline">\(t\)</span>的文章个数。</p>
-<h2 id="scikit-learn实现">scikit-learn实现</h2>
-<p>由于类<strong>TfidfVectorizer</strong>集合了<strong>CountVectorizer</strong>和<strong>TfidfTransformer</strong>两者的功能，所以直接使用<strong>TfidfVectorizer</strong>获得文本向量，具体如下所示 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer = TfidfVectorizer()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer.fit_transform(corpus)</span><br><span class="line">&lt;4x9 sparse matrix of <span class="built_in">type</span> <span class="string">&#x27;&lt;... &#x27;</span>numpy.float64<span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="number">19</span> stored elements <span class="keyword">in</span> Compressed Sparse ... <span class="built_in">format</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>其实scikit-learn官网中给出了具体的例子计算tf-idf，过程很详细，链接见本文的参考<a href="#Reference">[1]</a>。</p>
-<p><strong>TfidfVectorizer</strong>类中有许多参数，个人觉得比较重要的如下： - stop_words: 可以根据任务不同给定不同的停用词表 - ngram_range: 给定n-grams的取值范围 - max_df: 构建词表时，如果某个词的文本频率高于max_df就忽略该词 - min_df: 构建词表时，如果某个词的文本频率低于max_df就忽略该词 - vocabulary: 给定自定义的词表，这样会按照自定义词表的维度计算 - smooth_idf: 平滑处理，mooth_idf=True时， <span class="math display">\[idf(t)=log\frac{1+n}{1+df(t)}+1\]</span> - sublinear_tf: sublinear_tf=True时，用<span class="math inline">\(1+log(tf)\)</span>替换<span class="math inline">\(tf\)</span></p>
-<p><strong>TfidfVectorizer</strong>类的定义如下： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sklearn</span>.<span class="title">feature_extraction</span>.<span class="title">text</span>.<span class="title">TfidfVectorizer</span>(<span class="params">*, <span class="built_in">input</span>=<span class="string">&#x27;content&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>, decode_error=<span class="string">&#x27;strict&#x27;</span>, strip_accents=<span class="literal">None</span>, lowercase=<span class="literal">True</span>, preprocessor=<span class="literal">None</span>, tokenizer=<span class="literal">None</span>, analyzer=<span class="string">&#x27;word&#x27;</span>, stop_words=<span class="literal">None</span>, token_pattern=<span class="string">&#x27;(?u)\b\w\w+\b&#x27;</span>, ngram_range=(<span class="params"><span class="number">1</span>, <span class="number">1</span></span>), max_df=<span class="number">1.0</span>, min_df=<span class="number">1</span>, max_features=<span class="literal">None</span>, vocabulary=<span class="literal">None</span>, binary=<span class="literal">False</span>, dtype=&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.float64&#x27;</span>&gt;, norm=<span class="string">&#x27;l2&#x27;</span>, use_idf=<span class="literal">True</span>, smooth_idf=<span class="literal">True</span>, sublinear_tf=<span class="literal">False</span></span>)</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="word2vec">2. word2vec</h1>
-<p>word2vec在NLP领域应该有着里程碑式的意义，极大推动了NLP领域的研究进展。从大的概念上来讲，word2vec统指用一定维度的稠密向量表示词含义的方法，即将词语嵌入到高维向量空间中。这些嵌入到高维空间的词向量可以识别<strong>同义词，反义词或同类别的词</strong>，如人、动物、地点、植物、名字或概念等。</p>
-<p>相比于之前的词表示方法，word2vec词向量能够捕捉更加丰富的目标词含义（语义），而且word2vec模型包含了词之间的关系信息以及词的相似性，所以word2vec词向量可以很好的解决之前词表示无法解决的简单推理和类比问题，例如： &gt; wv[&quot;king&quot;] + wv[&quot;woman&quot;] - wv[&quot;man&quot;] = wv[&quot;queen&quot;]</p>
-<h2 id="神经网络语言模型">神经网络语言模型</h2>
-<p>要想知道word2vec如何训练词向量，我们要先了解神经网络语言模型，因为神经网络语言模型是word2vec的基础，神经网络的具体结构如下图所示：</p>
-<figure>
-<img src="https://i.loli.net/2021/04/15/4Zxu86QKELzXOWt.png" alt="神经网络语言模型.PNG" /><figcaption>神经网络语言模型.PNG</figcaption>
-</figure>
-<p>神经网络语言模型的训练目标是：给定文本中的前几个词（类似n-grams）来预测下一个单词，即<span class="math display">\[context(w) ==&gt; p(w|context(w))\]</span> 根据训练目标，我们很容易知道网络的输入和输出是什么，网络的输入是<span class="math inline">\(content(w)\)</span>的向量化表示（可以用单词的one-hot编码），<span class="math inline">\(p(w|context(w))\)</span>是网络输出经过softmax后的结果。从上面的过程可能看不出这和词向量有什么关系，其实词向量只是网络训练的附属品，当网络训练结束后，从映射层到隐藏层的权重矩阵<span class="math inline">\(W\)</span>就是词向量矩阵，词向量矩阵<span class="math inline">\(W\)</span>中的每一行即表示词表<span class="math inline">\(V\)</span>中某个词的词向量。</p>
-<p>word2vec有两个训练词向量的方法：<strong>CBOW</strong>和<strong>skip-gram</strong>， 在介绍这两种方法之前，需要知道这两种方法所采用的核心思想，即<strong>分布式假设</strong>： &gt; You shall know a word by the company it keeps - J.R. Firth 1957 如果两个词的上下文是相似的，它们的语义也是相似的。</p>
-<p>所以如果两个词经常用于相似的上下文中（与附近相似的词一起使用），则它们的word2vec词向量在词向量空间中也会比较<strong>接近</strong>。</p>
-<h2 id="cbowcontinuous-bag-of-words">CBOW(continuous bag-of-words)</h2>
-<p>核心思想：使用<strong>邻近词预测中心词</strong>，邻近词根据滑动窗口（window size）进行选择 CBOW网络的输入：滑窗内邻近词one-hot向量（也可以随机初始化）的累加 CBOW训练样本的label：中心词的one-hot编码</p>
-<h3 id="基于hierarchical-softmax的cbow模型">基于Hierarchical Softmax的CBOW模型</h3>
-<p>CBOW模型由三层构成：输入层，投影层和输出层，具体的网络结构如下图所示：</p>
-<p><img src="https://i.loli.net/2021/04/15/isWXjqcrg2OMANn.png" alt="CBOW_分层softmax.PNG" /> 图中 <span class="math inline">\(v(context(w)_1), v(context(w)_1), ..., v(context(w)_{2c})\)</span> 表示中心词 <span class="math inline">\(w\)</span> 前 <span class="math inline">\(c\)</span> 和后 <span class="math inline">\(c\)</span> 个邻近词的词向量。投影层做向量的累加操作，即 <span class="math inline">\(sum[v(context(w)_1), v(context(w)_1), ..., v(context(w)_{2c})]\)</span>.</p>
-<p>从CBOW模型网络结构可以看出其与上文介绍的神经网络语言模型有三点不同： - 输入层到投影层：CBOW模型用邻近词向量<strong>累加</strong>代替前者的<strong>拼接</strong>操作 - 隐藏层：CBOW模型去除了前者使用的隐藏层 - 输出层：CBOW模型用<strong>huffman树</strong>代替前者的<strong>softmax</strong>操作</p>
-<p>基于Hierarchical Softmax的CBOW模型的目标函数定义，训练流程以及梯度计算可以参考<a href="#Reference">[2]</a>，这篇博客由浅入深介绍了word2vec中的数学原理，里面的推导过程非常详细，我之前疑惑的点都是通过这篇博客得以解决。</p>
-<h3 id="基于negative-sampling的cbow模型">基于Negative Sampling的CBOW模型</h3>
-<p>除了Hierarchical Softmax方法，Tomas Mikolov提出的另一个优化技巧是Negative Sampling(负采样)。当一个训练样本输入到网络后，会引起网络中所有权重的更新，这样会改变词汇表中所有词的向量值。但当词汇表的规模达到上亿级别时，显然这种更新所有权重的方法会变得极其低效。所以为了加快词向量模型的训练速度，Tomas Mikolov提出了负采样方法。</p>
-<p>负采样<strong>核心思想</strong>：选取<span class="math inline">\(n\)</span>个负样本词对（目标输出词之外的词），根据其对输出的贡献来更新对应的权重。通过这种方法，可以<strong>极大地减小计算量</strong>，而且<strong>对训练网络性能不会有明显影响</strong>。 &gt; <strong>注意</strong>： 如果是在一个小型语料库上训练词向量，可以使用5~20个样本的负采样率。对于较大型的语料库和词汇表，根据Mikolov团队的建议，可以将负采样率降低到2~5个样本。</p>
-<p>基于Negative Sampling的CBOW模型的目标函数定义，训练流程以及梯度计算同样可以参考<a href="#Reference">[2]</a></p>
-<h2 id="skip-gram">skip-gram</h2>
-<p>核心思想：使用<strong>中心词分别预测邻近词</strong>，邻近词根据滑动窗口（window size）进行选择 skip-gram网络的输入：中心词的one-hot向量（也可以随机初始化） skip-gram训练样本的label：每个邻近词的单独one-hot编码</p>
-<h3 id="基于hierarchical-softmax的skip-gram模型">基于Hierarchical Softmax的skip-gram模型</h3>
-<p>skip-gram模型由三层构成：输入层，投影层和输出层，具体的网络结构如下图所示：</p>
-<p><img src="https://i.loli.net/2021/04/15/zHPwLQmckWvbo6t.png" alt="skip_gram分层softmax.PNG" /> 图中 <span class="math inline">\(v(w)\)</span> 表示中心词的词向量，投影层其实可以去除掉。skip-gram模型和CBOW模型的主要区别在于目标函数 <span class="math inline">\(L\)</span> 的定义：</p>
-<p><strong>CBOW模型</strong>：</p>
-<p><span class="math inline">\(p(w|context(w))=\prod\limits_{j=2}^{l^w}p(d_j^w|X_w,\theta_{j-1}^w)\)</span></p>
-<p>$p(d_j^w|X_w,_{j-1}^w)= \begin{cases} (X_w<sup>T<em>{j-1}^w), ,,,, d_j<sup>w=0\ 1-(X_w</sup>T</em>{j-1}</sup>w), d_j^w=1 \end{cases} $</p>
-<p><span class="math inline">\(L = \sum\limits_{w\in C}log\,p(w|context(w))=\sum\limits_{w\in C}log\prod\limits_{j=2}^{l^w}\{[\sigma(X_w^T\theta_{j-1}^w)]^{1-d_j^w}\cdot[1-\sigma(X_w^T\theta_{j-1}^w)]^{d_j^w}]\}\)</span></p>
-<p><strong>skip-gram模型</strong>：</p>
-<p><span class="math inline">\(p(context(w)|w)=\prod\limits_{u\in context(w)}p(u|w)=\prod\limits_{u\in context(w)}\prod\limits_{j=2}^{l^u}p(d_j^u|v(w),\theta_{j-1}^u)\)</span></p>
-<p><span class="math inline">\(L = \sum\limits_{w\in C}log\prod\limits_{u\in context(w)}\prod\limits_{j=2}^{l^u}\{[\sigma(v(w)^T\theta_{j-1}^u)]^{1-d_j^u}\cdot[1-\sigma(v(w)^T\theta_{j-1}^u)]^{d_j^u}]\}\)</span></p>
-<p>其中，<span class="math inline">\(l^w\)</span> 表示从huffman树的根节点出发到 <span class="math inline">\(w\)</span> 叶子节点的路径上包含的节点个数，<span class="math inline">\(d_j^w\)</span> 表示该路径上第 <span class="math inline">\(j\)</span> 个非根节点对应的huffman编码，<span class="math inline">\(\theta_j^w\)</span> 表示非叶子节点上对应的参数向量。</p>
-<h3 id="基于negative-sampling的skip-gram模型">基于Negative Sampling的skip-gram模型</h3>
-<p>在Negative Sampling的方法下，skip-gram模型和CBOW模型的主要区别同样在于目标函数 <span class="math inline">\(L\)</span> 的定义：</p>
-<p><strong>CBOW模型</strong>： 对于给定的样本 <span class="math inline">\((context(w), w)\)</span>，CBOW模型希望最大化</p>
-<p><span class="math inline">\(g(w)=\prod\limits_{u\in \{w\}\cup NEG(w)}p(u|context(w))\)</span></p>
-<p><span class="math inline">\(p(u|context(w))= \begin{cases} \sigma(X_w^T\theta^u), \qquad\quad\,\,\,\, L^w(u)=1\\ 1-\sigma(X_w^T\theta^u), \qquad L^w(u)=0 \end{cases}\)</span></p>
-<p><span class="math inline">\(L=log\,\prod\limits_{w\in C}g(w)=\sum\limits_{w\in C}log\,g(w) \\ \,\,\,\,=\sum\limits_{w\in C}log\prod\limits_{u\in \{w\}\cup NEG(w)} \{[\sigma(X_w^T\theta^u)]^{L^w(u)}\cdot[1-\sigma(X_w^T\theta^u)]^{1-L^w(u)}]\}\)</span></p>
-<p>其中<span class="math inline">\(NEG(w)\)</span>为关于 <span class="math inline">\(w\)</span> 的负样本子集；当 <span class="math inline">\(u\in \{w\}\)</span> 时，<span class="math inline">\(L^w(u)=1\)</span>，否则为 <span class="math inline">\(0\)</span>.</p>
-<p><strong>skip-gram模型</strong>：</p>
-<p><span class="math inline">\(g(w)=\prod\limits_{u\in context(w)}g(u)=\prod\limits_{u\in context(w)}\prod\limits_{z\in \{u\} \cup NEG(u)}p(z|w)\)</span></p>
-<p><span class="math inline">\(p(z|w)= \begin{cases} \sigma(v(w)^T\theta^z), \qquad\quad\,\,\,\, L^u(z)=1\\ 1-\sigma(v(w)^T\theta^z), \qquad L^u(z)=0 \end{cases}\)</span></p>
-<p><span class="math inline">\(L=log\,\prod\limits_{w\in C}g(w)=log\,\prod\limits_{w\in C}\prod\limits_{u\in context(w)}\prod\limits_{z\in \{u\} \cup NEG(u)}p(z|w) \\ \,\,\,\,=\sum\limits_{w\in C}\sum\limits_{u\in context(w)}log \prod\limits_{z\in \{u\} \cup NEG(u)} \{[\sigma(v(w)^T\theta^z)]^{L^u(z)}\cdot[1-\sigma(v(w)^T\theta^z)]^{1-L^u(z)}]\}\)</span></p>
-<p>至此，word2vec的训练机理，两种模型（CBOW、skip-gram）及其分别对应的两种方法（分层softmax、负采样）讲述完毕。</p>
-<h2 id="训练小技巧">训练小技巧</h2>
-<h3 id="高频-2-gram">高频 2-gram</h3>
-<p>训练语料库中，有些词经常和其他词组合出现，例如 &quot;san&quot; 和 &quot;Francisco&quot; 共现频率非常高，但这种预测是没有太大价值的，而且这种组合词通常与其中的单个词表达的意义完全不一样，所以训练时将这种共现词看作一个词 <strong>&quot;san_Francisco&quot;</strong> (2-gram)，除了 2-gram，也会考虑 3-gram.</p>
-<p>训练过程中，如果两个词的得分高于阈值 <span class="math inline">\(\delta\)</span>, 则这两个词会当作一个词项放在word2vec的词表中，打分函数如下所示：</p>
-<p><span class="math display">\[score(w_i, w_j) = \frac{count(w_i, w_j)-\delta}{count(w_i)\times count(w_j)}\]</span></p>
-<h3 id="高频词条下采样">高频词条下采样</h3>
-<p>像 &quot;the&quot; 或 &quot;a&quot; 这样的常用词通常不包含重要信息，语料库中 &quot;the&quot; 与许多名词都共现，因此并不会带来更多的含义，反而给word2vec语义相似性表示带来一定的混淆。但所有词都是有意义的，比如像 &quot;the&quot; 和 &quot;a&quot; 这样的停用词，又因为词向量会经常用在生成模型中，在这种场景下，词汇表中就必须包含停用词和其他常用词，并且允许这些词影响其相邻词的词向量。</p>
-<p>为了减少像停用词这样的高频词的影响，可以在训练过程中<strong>对词进行与其出现频率成反比的采样</strong>。相比于罕见词，高频词被赋以对向量更小的影响力。对于一个给定词，其采样概率如下所示： <span class="math display">\[P(w_i)=1-\sqrt{\frac{t}{f(w_i)}}\]</span> 其中，<span class="math inline">\(f(w_i)\)</span> 表示词 <span class="math inline">\(w_i\)</span> 在语料库中出现的频率，<span class="math inline">\(t\)</span> 表示频率阈值，超出这个阈值的单词才会进行下采样。</p>
-<h2 id="两种模型的适用场景">两种模型的适用场景</h2>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在NLP领域的任务中，为了使模型便于训练，需要将词语或文本表征为固定长度的数值特征向量，最开始使用的便是<strong>词袋表征方法</strong>（BOW），类似于one-hot编码，区别在于向量中的每个元素是相应单词在文本中出现的统计次数。但是这种方法无法区别下述情况：</p>
 <blockquote>
+<p>This is the first document.<br>Is this the first document?</p>
+</blockquote>
+<a id="more"></a>
+<p>虽然两个句子表达的含义不同，但是通过BOW表征的向量确是相同的。为了解决该问题，需要加入位置顺序的信息，除了1-grams，还需要提取2-grams或者更高的grams特征：</p>
+<blockquote>
+<p>Bi-grams are cool!<br>[‘bi’, ‘grams’, ‘are’, ‘cool’, ‘bi grams’, ‘grams are’, ‘are cool’]</p>
+</blockquote>
+<p>但是在大型的语料库中，有许多词出现的频率非常高（例如：“的”, “是”，“你”，“我”），但是这些词包含的有用信息确很少，如果直接将语料库中统计的单词出现次数作为特征输入到模型中，出现多次但无用的词会在模型中降低出现次数虽少但是包含信息量很大的词的作用，比如某一专业领域的专有名词。为了解决这一问题，需要给不同的词以不同的权重，<strong>tf-idf</strong>便是一种计算权重的方法。</p>
+<h1 id="1-tf-idf"><a href="#1-tf-idf" class="headerlink" title="1. tf-idf"></a>1. tf-idf</h1><p>该方法最初用在信息检索（搜索引擎网页排序），后来被NLP领域借鉴用来做文本的embedding。<strong>tf-idf</strong>两部分的具体含义如下：</p>
+<p><strong>tf</strong>: term-frequency  词频<br><strong>idf</strong>: inverse document-frequency  逆文本频率</p>
+<script type="math/tex; mode=display">tf-idf(t,d)=tf(t,d)\times idf(t)</script><p>$tf(t,d)$: 单词 $t$ 在指定文本 $d$ 中出现的次数（$t$在英文资料中其实是term的缩写，因为毕竟n-grams并不都是单词，但中文我也不知道怎样翻译合适:disappointed:)</p>
+<p>$idf(t)=log\frac{n}{df(t)}+1$<br>上式中，$n$表示语料库中文章的总数，$df(t)$表示语料库中包含单词$t$的文章个数。</p>
+<h2 id="scikit-learn实现"><a href="#scikit-learn实现" class="headerlink" title="scikit-learn实现"></a>scikit-learn实现</h2><p>由于类<strong>TfidfVectorizer</strong>集合了<strong>CountVectorizer</strong>和<strong>TfidfTransformer</strong>两者的功能，所以直接使用<strong>TfidfVectorizer</strong>获得文本向量，具体如下所示<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer = TfidfVectorizer()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vectorizer.fit_transform(corpus)</span><br><span class="line">&lt;4x9 sparse matrix of <span class="built_in">type</span> <span class="string">&#x27;&lt;... &#x27;</span>numpy.float64<span class="string">&#x27;&gt;&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="number">19</span> stored elements <span class="keyword">in</span> Compressed Sparse ... <span class="built_in">format</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其实scikit-learn官网中给出了具体的例子计算tf-idf，过程很详细，链接见本文的参考<a href="#Reference">[1]</a>。</p>
+<p><strong>TfidfVectorizer</strong>类中有许多参数，个人觉得比较重要的如下：</p>
+<ul>
+<li>stop_words: 可以根据任务不同给定不同的停用词表</li>
+<li>ngram_range: 给定n-grams的取值范围</li>
+<li>max_df: 构建词表时，如果某个词的文本频率高于max_df就忽略该词</li>
+<li>min_df: 构建词表时，如果某个词的文本频率低于max_df就忽略该词</li>
+<li>vocabulary: 给定自定义的词表，这样会按照自定义词表的维度计算</li>
+<li>smooth_idf: 平滑处理，mooth_idf=True时，<script type="math/tex; mode=display">idf(t)=log\frac{1+n}{1+df(t)}+1</script></li>
+<li>sublinear_tf: sublinear_tf=True时，用$1+log(tf)$替换$tf$</li>
+</ul>
+<p><strong>TfidfVectorizer</strong>类的定义如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sklearn</span>.<span class="title">feature_extraction</span>.<span class="title">text</span>.<span class="title">TfidfVectorizer</span>(<span class="params">*, <span class="built_in">input</span>=<span class="string">&#x27;content&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>, decode_error=<span class="string">&#x27;strict&#x27;</span>, strip_accents=<span class="literal">None</span>, lowercase=<span class="literal">True</span>, preprocessor=<span class="literal">None</span>, tokenizer=<span class="literal">None</span>, analyzer=<span class="string">&#x27;word&#x27;</span>, stop_words=<span class="literal">None</span>, token_pattern=<span class="string">&#x27;(?u)\b\w\w+\b&#x27;</span>, ngram_range=(<span class="params"><span class="number">1</span>, <span class="number">1</span></span>), max_df=<span class="number">1.0</span>, min_df=<span class="number">1</span>, max_features=<span class="literal">None</span>, vocabulary=<span class="literal">None</span>, binary=<span class="literal">False</span>, dtype=&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.float64&#x27;</span>&gt;, norm=<span class="string">&#x27;l2&#x27;</span>, use_idf=<span class="literal">True</span>, smooth_idf=<span class="literal">True</span>, sublinear_tf=<span class="literal">False</span></span>)</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="2-word2vec"><a href="#2-word2vec" class="headerlink" title="2. word2vec"></a>2. word2vec</h1><p>word2vec在NLP领域应该有着里程碑式的意义，极大推动了NLP领域的研究进展。从大的概念上来讲，word2vec统指用一定维度的稠密向量表示词含义的方法，即将词语嵌入到高维向量空间中。这些嵌入到高维空间的词向量可以识别<strong>同义词，反义词或同类别的词</strong>，如人、动物、地点、植物、名字或概念等。</p>
+<p>相比于之前的词表示方法，word2vec词向量能够捕捉更加丰富的目标词含义（语义），而且word2vec模型包含了词之间的关系信息以及词的相似性，所以word2vec词向量可以很好的解决之前词表示无法解决的简单推理和类比问题，例如：</p>
+<blockquote>
+<p>wv[“king”] + wv[“woman”] - wv[“man”] = wv[“queen”]</p>
+</blockquote>
+<h2 id="神经网络语言模型"><a href="#神经网络语言模型" class="headerlink" title="神经网络语言模型"></a>神经网络语言模型</h2><p>要想知道word2vec如何训练词向量，我们要先了解神经网络语言模型，因为神经网络语言模型是word2vec的基础，神经网络的具体结构如下图所示：</p>
+<p><img src="https://i.loli.net/2021/04/15/4Zxu86QKELzXOWt.png" alt="神经网络语言模型.PNG"></p>
+<p>神经网络语言模型的训练目标是：给定文本中的前几个词（类似n-grams）来预测下一个单词，即<script type="math/tex">context(w) ==> p(w|context(w))</script>  根据训练目标，我们很容易知道网络的输入和输出是什么，网络的输入是$content(w)$的向量化表示（可以用单词的one-hot编码），$p(w|context(w))$是网络输出经过softmax后的结果。从上面的过程可能看不出这和词向量有什么关系，其实词向量只是网络训练的附属品，当网络训练结束后，从映射层到隐藏层的权重矩阵$W$就是词向量矩阵，词向量矩阵$W$中的每一行即表示词表$V$中某个词的词向量。</p>
+<p>word2vec有两个训练词向量的方法：<strong>CBOW</strong>和<strong>skip-gram</strong>， 在介绍这两种方法之前，需要知道这两种方法所采用的核心思想，即<strong>分布式假设</strong>：</p>
+<blockquote>
+<p>You shall know a word by the company it keeps - J.R. Firth 1957<br>  如果两个词的上下文是相似的，它们的语义也是相似的。</p>
+</blockquote>
+<p>所以如果两个词经常用于相似的上下文中（与附近相似的词一起使用），则它们的word2vec词向量在词向量空间中也会比较<strong>接近</strong>。</p>
+<h2 id="CBOW-continuous-bag-of-words"><a href="#CBOW-continuous-bag-of-words" class="headerlink" title="CBOW(continuous bag-of-words)"></a>CBOW(continuous bag-of-words)</h2><p>核心思想：使用<strong>邻近词预测中心词</strong>，邻近词根据滑动窗口（window size）进行选择<br>CBOW网络的输入：滑窗内邻近词one-hot向量（也可以随机初始化）的累加<br>CBOW训练样本的label：中心词的one-hot编码</p>
+<h3 id="基于Hierarchical-Softmax的CBOW模型"><a href="#基于Hierarchical-Softmax的CBOW模型" class="headerlink" title="基于Hierarchical Softmax的CBOW模型"></a>基于Hierarchical Softmax的CBOW模型</h3><p>CBOW模型由三层构成：输入层，投影层和输出层，具体的网络结构如下图所示：</p>
+<p><img src="https://i.loli.net/2021/04/15/isWXjqcrg2OMANn.png" alt="CBOW_分层softmax.PNG"><br>图中 $v(context(w)_1), v(context(w)_1), …, v(context(w)_{2c})$ 表示中心词 $w$ 前 $c$ 和后 $c$ 个邻近词的词向量。投影层做向量的累加操作，即</p>
+<script type="math/tex; mode=display">sum[v(context(w)_1), v(context(w)_1), ..., v(context(w)_{2c})]</script><p>从CBOW模型网络结构可以看出其与上文介绍的神经网络语言模型有三点不同：</p>
+<ul>
+<li>输入层到投影层：CBOW模型用邻近词向量<strong>累加</strong>代替前者的<strong>拼接</strong>操作</li>
+<li>隐藏层：CBOW模型去除了前者使用的隐藏层</li>
+<li>输出层：CBOW模型用<strong>huffman树</strong>代替前者的<strong>softmax</strong>操作</li>
+</ul>
+<p>基于Hierarchical Softmax的CBOW模型的目标函数定义，训练流程以及梯度计算可以参考<a href="#Reference">[2]</a>，这篇博客由浅入深介绍了word2vec中的数学原理，里面的推导过程非常详细，我之前疑惑的点都是通过这篇博客得以解决。</p>
+<h3 id="基于Negative-Sampling的CBOW模型"><a href="#基于Negative-Sampling的CBOW模型" class="headerlink" title="基于Negative Sampling的CBOW模型"></a>基于Negative Sampling的CBOW模型</h3><p>除了Hierarchical Softmax方法，Tomas Mikolov提出的另一个优化技巧是Negative Sampling(负采样)。当一个训练样本输入到网络后，会引起网络中所有权重的更新，这样会改变词汇表中所有词的向量值。但当词汇表的规模达到上亿级别时，显然这种更新所有权重的方法会变得极其低效。所以为了加快词向量模型的训练速度，Tomas Mikolov提出了负采样方法。</p>
+<p>负采样<strong>核心思想</strong>：选取$n$个负样本词对（目标输出词之外的词），根据其对输出的贡献来更新对应的权重。通过这种方法，可以<strong>极大地减小计算量</strong>，而且<strong>对训练网络性能不会有明显影响</strong>。</p>
+<blockquote>
+<p><strong>注意</strong>： 如果是在一个小型语料库上训练词向量，可以使用5~20个样本的负采样率。对于较大型的语料库和词汇表，根据Mikolov团队的建议，可以将负采样率降低到2~5个样本。</p>
+</blockquote>
+<p>基于Negative Sampling的CBOW模型的目标函数定义，训练流程以及梯度计算同样可以参考<a href="#Reference">[2]</a></p>
+<h2 id="skip-gram"><a href="#skip-gram" class="headerlink" title="skip-gram"></a>skip-gram</h2><p>核心思想：使用<strong>中心词分别预测邻近词</strong>，邻近词根据滑动窗口（window size）进行选择<br>skip-gram网络的输入：中心词的one-hot向量（也可以随机初始化）<br>skip-gram训练样本的label：每个邻近词的单独one-hot编码</p>
+<h3 id="基于Hierarchical-Softmax的skip-gram模型"><a href="#基于Hierarchical-Softmax的skip-gram模型" class="headerlink" title="基于Hierarchical Softmax的skip-gram模型"></a>基于Hierarchical Softmax的skip-gram模型</h3><p>skip-gram模型由三层构成：输入层，投影层和输出层，具体的网络结构如下图所示：</p>
+<p><img src="https://i.loli.net/2021/04/15/zHPwLQmckWvbo6t.png" alt="skip_gram分层softmax.PNG"><br>图中 $v(w)$ 表示中心词的词向量，投影层其实可以去除掉。skip-gram模型和CBOW模型的主要区别在于目标函数 $L$ 的定义：</p>
+<p><strong>CBOW模型</strong>：</p>
+<p>$p(w|context(w))=\prod\limits_{j=2}^{l^w}p(d_j^w|X_w,\theta_{j-1}^w)$</p>
+<p>$p(d_j^w|X_w,\theta_{j-1}^w)= \begin{cases}<br>\sigma(X_w^T\theta_{j-1}^w), \qquad\quad\,\,\,\,  d_j^w=0\\<br>1-\sigma(X_w^T\theta_{j-1}^w), \qquad  d_j^w=1<br>\end{cases}<br>$</p>
+<p>$L = \sum\limits_{w\in C}log\,p(w|context(w))=\sum\limits_{w\in C}log\prod\limits_{j=2}^{l^w}\{[\sigma(X_w^T\theta_{j-1}^w)]^{1-d_j^w}\cdot[1-\sigma(X_w^T\theta_{j-1}^w)]^{d_j^w}]\}$</p>
+<p><strong>skip-gram模型</strong>：</p>
+<p>$p(context(w)|w)=\prod\limits_{u\in context(w)}p(u|w)=\prod\limits_{u\in context(w)}\prod\limits_{j=2}^{l^u}p(d_j^u|v(w),\theta_{j-1}^u)$</p>
+<p>$L = \sum\limits_{w\in C}log\prod\limits_{u\in context(w)}\prod\limits_{j=2}^{l^u}\{[\sigma(v(w)^T\theta_{j-1}^u)]^{1-d_j^u}\cdot[1-\sigma(v(w)^T\theta_{j-1}^u)]^{d_j^u}]\}$</p>
+<p>其中，$l^w$ 表示从huffman树的根节点出发到 $w$ 叶子节点的路径上包含的节点个数，$d_j^w$ 表示该路径上第 $j$ 个非根节点对应的huffman编码，$\theta_j^w$ 表示非叶子节点上对应的参数向量。</p>
+<h3 id="基于Negative-Sampling的skip-gram模型"><a href="#基于Negative-Sampling的skip-gram模型" class="headerlink" title="基于Negative Sampling的skip-gram模型"></a>基于Negative Sampling的skip-gram模型</h3><p>在Negative Sampling的方法下，skip-gram模型和CBOW模型的主要区别同样在于目标函数 $L$ 的定义：</p>
+<p><strong>CBOW模型</strong>：<br>对于给定的样本 $(context(w), w)$，CBOW模型希望最大化</p>
+<p>$g(w)=\prod\limits_{u\in \{w\}\cup NEG(w)}p(u|context(w))$</p>
+<p>$p(u|context(w))= \begin{cases}<br>\sigma(X_w^T\theta^u), \qquad\quad\,\,\,\,  L^w(u)=1\\<br>1-\sigma(X_w^T\theta^u), \qquad  L^w(u)=0<br>\end{cases}$</p>
+<p>$L=log\,\prod\limits_{w\in C}g(w)=\sum\limits_{w\in C}log\,g(w)<br>\\ \,\,\,\,=\sum\limits_{w\in C}log\prod\limits_{u\in \{w\}\cup NEG(w)}<br>\{[\sigma(X_w^T\theta^u)]^{L^w(u)}\cdot[1-\sigma(X_w^T\theta^u)]^{1-L^w(u)}]\}$</p>
+<p>其中$NEG(w)$为关于 $w$ 的负样本子集；当 $u\in \{w\}$ 时，$L^w(u)=1$，否则为 $0$.</p>
+<p><strong>skip-gram模型</strong>：</p>
+<p>$g(w)=\prod\limits_{u\in context(w)}g(u)=\prod\limits_{u\in context(w)}\prod\limits_{z\in \{u\} \cup NEG(u)}p(z|w)$</p>
+<p>$p(z|w)= \begin{cases}<br>\sigma(v(w)^T\theta^z), \qquad\quad\,\,\,\,  L^u(z)=1\\<br>1-\sigma(v(w)^T\theta^z), \qquad  L^u(z)=0<br>\end{cases}$</p>
+<p>$L=log\,\prod\limits_{w\in C}g(w)=log\,\prod\limits_{w\in C}\prod\limits_{u\in context(w)}\prod\limits_{z\in \{u\} \cup NEG(u)}p(z|w)<br>\\ \,\,\,\,=\sum\limits_{w\in C}\sum\limits_{u\in context(w)}log<br>\prod\limits_{z\in \{u\} \cup NEG(u)}<br>\{[\sigma(v(w)^T\theta^z)]^{L^u(z)}\cdot[1-\sigma(v(w)^T\theta^z)]^{1-L^u(z)}]\}$</p>
+<p>至此，word2vec的训练机理，两种模型（CBOW、skip-gram）及其分别对应的两种方法（分层softmax、负采样）讲述完毕。</p>
+<h2 id="训练小技巧"><a href="#训练小技巧" class="headerlink" title="训练小技巧"></a>训练小技巧</h2><h3 id="高频-2-gram"><a href="#高频-2-gram" class="headerlink" title="高频 2-gram"></a>高频 2-gram</h3><p>训练语料库中，有些词经常和其他词组合出现，例如 “san” 和 “Francisco” 共现频率非常高，但这种预测是没有太大价值的，而且这种组合词通常与其中的单个词表达的意义完全不一样，所以训练时将这种共现词看作一个词 <strong>“san_Francisco”</strong> (2-gram)，除了 2-gram，也会考虑 3-gram.</p>
+<p>训练过程中，如果两个词的得分高于阈值 $\delta$, 则这两个词会当作一个词项放在word2vec的词表中，打分函数如下所示：</p>
+<script type="math/tex; mode=display">score(w_i, w_j) = \frac{count(w_i, w_j)-\delta}{count(w_i)\times count(w_j)}</script><h3 id="高频词条下采样"><a href="#高频词条下采样" class="headerlink" title="高频词条下采样"></a>高频词条下采样</h3><p>像 “the” 或 “a” 这样的常用词通常不包含重要信息，语料库中 “the” 与许多名词都共现，因此并不会带来更多的含义，反而给word2vec语义相似性表示带来一定的混淆。但所有词都是有意义的，比如像 “the” 和 “a” 这样的停用词，又因为词向量会经常用在生成模型中，在这种场景下，词汇表中就必须包含停用词和其他常用词，并且允许这些词影响其相邻词的词向量。</p>
+<p>为了减少像停用词这样的高频词的影响，可以在训练过程中<strong>对词进行与其出现频率成反比的采样</strong>。相比于罕见词，高频词被赋以对向量更小的影响力。对于一个给定词，其采样概率如下所示：</p>
+<script type="math/tex; mode=display">P(w_i)=1-\sqrt{\frac{t}{f(w_i)}}</script><p>其中，$f(w_i)$ 表示词 $w_i$ 在语料库中出现的频率，$t$ 表示频率阈值，超出这个阈值的单词才会进行下采样。</p>
+<h2 id="两种模型的适用场景"><a href="#两种模型的适用场景" class="headerlink" title="两种模型的适用场景"></a>两种模型的适用场景</h2><blockquote>
 <p>Mikolov强调，skip-gram 方法对于小型语料库和一些罕见的词项比较适用。在 skip-gram 方法中，由于网络结构的原因，将会产生更多的训练样本。但 CBOW 方法在常用词上有更高的精确性，并且训练速度会快很多。</p>
 </blockquote>
-<h1 id="fasttext">3. FastText</h1>
-<h2 id="前言-1">前言</h2>
-<p>word2vec虽然在词表征方面已经达到了很好的效果，但是仍然存在以下两点主要问题： - <strong>OOV 问题</strong> word2vec 仅对词表中的每个词训练相应的词向量，对于没有出现在词表中的单词是爱莫能助的，例如： <img src="https://i.loli.net/2021/04/16/AWgSzUtfDsvOuM5.png" alt="fasttext.PNG" /></p>
+<h1 id="3-FastText"><a href="#3-FastText" class="headerlink" title="3. FastText"></a>3. FastText</h1><h2 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h2><p>word2vec虽然在词表征方面已经达到了很好的效果，但是仍然存在以下两点主要问题：</p>
 <ul>
-<li><strong>单词形态学的含义</strong> word2vec 基于单词的上下文进行训练，这种方式只考虑了单词的语义信息而没有考虑单词的形态学信息，但是形态学层面的信息也是单词表征的一部分。例如： <span class="math inline">\(\,\)</span> <span class="math inline">\(embedding[&quot;apparently&quot;] \leftarrow embedding[&quot;apparent&quot;] + embedding[&quot;ly&quot;]\)</span></li>
+<li><p><strong>OOV 问题</strong><br> word2vec 仅对词表中的每个词训练相应的词向量，对于没有出现在词表中的单词是爱莫能助的，例如：<br> <img src="https://i.loli.net/2021/04/16/AWgSzUtfDsvOuM5.png" alt="fasttext.PNG"></p>
+</li>
+<li><p><strong>单词形态学的含义</strong><br>  word2vec 基于单词的上下文进行训练，这种方式只考虑了单词的语义信息而没有考虑单词的形态学信息，但是形态学层面的信息也是单词表征的一部分。例如：<br>  $\,$<br>  $embedding[“apparently”] \leftarrow embedding[“apparent”] + embedding[“ly”]$</p>
+</li>
 </ul>
 <p>所以为了解决上述两点问题，<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.04606">Bojanowski et al</a> 提出了新的词嵌入方法，即FastText. FastText在训练过程中额外使用了单词的 n-grams 信息来提高词向量的表征能力。</p>
-<h2 id="与-word2vec-的主要区别">与 word2vec 的主要区别</h2>
-<p>word2vec 和 Fasttext 在词向量训练时的主要区别在于网络输入层输入向量的构建方式，下面以 skip-gram 方法为例来说明两者的不同点：</p>
-<p>假如训练语料中有一句话为 <strong>I am eating food now</strong>，用中心词 <strong>eating</strong> 来预测邻近词 <strong>am</strong> 和 <strong>food</strong> <img src="https://i.loli.net/2021/04/16/Yzf3gNlXBnCASJU.png" alt="fasttext_eg1.PNG" /> word2vec 直接用 <span class="math inline">\(v(&#39;eating&#39;)\)</span> 作为输入向量，而 Fasttext 输入向量的构建方式如下图所示： <img src="https://i.loli.net/2021/04/16/QpzSnWH3d9UGgiL.png" alt="fasttext_eg2.PNG" /> 从上图中可以看出 Fasttext 输入向量是中心词和其 n-grams 各元素的向量的累加。</p>
-<h2 id="word2vec-和-fasttext-的适用场景">word2vec 和 FastText 的适用场景</h2>
-<p>gensim 有一个比较 word2vec 和 FastText 不同点的<a target="_blank" rel="noopener" href="https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/FastText_Tutorial.ipynb">tutorial</a>，可以用作参考。这篇tutorial指出 FastText 的核心是单词的形态结构包含着单词含义的重要信息。</p>
+<h2 id="与-word2vec-的主要区别"><a href="#与-word2vec-的主要区别" class="headerlink" title="与 word2vec 的主要区别"></a>与 word2vec 的主要区别</h2><p>word2vec 和 Fasttext 在词向量训练时的主要区别在于网络输入层输入向量的构建方式，下面以 skip-gram 方法为例来说明两者的不同点，参考<a href="#Reference">[3]</a>：</p>
+<p>假如训练语料中有一句话为 <strong>I am eating food now</strong>，用中心词 <strong>eating</strong> 来预测邻近词 <strong>am</strong> 和 <strong>food</strong><br><img src="https://i.loli.net/2021/04/16/Yzf3gNlXBnCASJU.png" alt="fasttext_eg1.PNG"><br>word2vec 直接用 $v(eating)$ 作为输入向量，而 Fasttext 输入向量的构建方式如下图所示：<br><img src="https://i.loli.net/2021/04/16/QpzSnWH3d9UGgiL.png" alt="fasttext_eg2.PNG"><br>从上图中可以看出 Fasttext 输入向量是中心词和其 n-grams 各元素的向量的累加。</p>
+<h2 id="word2vec-和-FastText-的适用场景"><a href="#word2vec-和-FastText-的适用场景" class="headerlink" title="word2vec 和 FastText 的适用场景"></a>word2vec 和 FastText 的适用场景</h2><p>gensim 有一个比较 word2vec 和 FastText 不同点的<a target="_blank" rel="noopener" href="https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/FastText_Tutorial.ipynb">tutorial</a>，可以用作参考。这篇tutorial指出 FastText 的核心是单词的形态结构包含着单词含义的重要信息。</p>
 <p>FastText 在 <strong>syntactic tasks</strong> 上表现要明显好于 word2vec，特别是当训练语料库较小时；但是 word2vec 在 <strong>semantic tasks</strong> 上要比 FastText 略胜一筹，随着训练语料库的增大这种差异会变小。FastText 的训练时间大概是word2vec的1.5倍。</p>
-<p><strong>syntactic tasks</strong> 示例： <img src="https://i.loli.net/2021/04/16/I2KXHZz83dLGvMA.png" alt="fasttext_eg3.PNG" /></p>
-<p><strong>semantic tasks</strong> 示例： <img src="https://i.loli.net/2021/04/16/pBFLJ6yOkqljomQ.png" alt="fasttext_eg4.PNG" /></p>
-<h1 id="glove">4. GloVe</h1>
-<p>GloVe 全称为 global vectors of word co-occurrences，从名字中可以看出该方法使用词的共现信息来获得全局的词向量，这也是该方法相较于 word2vec 的优势。从第二小节中我们知道 word2vec 使用的是局部统计信息（滑窗内中心词的上下文信息），但 GloVe 除了使用局部统计信息外还使用了<strong>全局统计信息</strong>（词共现矩阵）。</p>
+<p><strong>syntactic tasks</strong> 示例：<br><img src="https://i.loli.net/2021/04/16/I2KXHZz83dLGvMA.png" alt="fasttext_eg3.PNG"></p>
+<p><strong>semantic tasks</strong> 示例：<br><img src="https://i.loli.net/2021/04/16/pBFLJ6yOkqljomQ.png" alt="fasttext_eg4.PNG"></p>
+<h1 id="4-GloVe"><a href="#4-GloVe" class="headerlink" title="4. GloVe"></a>4. GloVe</h1><p>GloVe 全称为 global vectors of word co-occurrences，从名字中可以看出该方法使用词的共现信息来获得全局的词向量，这也是该方法相较于 word2vec 的优势。从第二小节中我们知道 word2vec 使用的是局部统计信息（滑窗内中心词的上下文信息），但 GloVe 除了使用局部统计信息外还使用了<strong>全局统计信息</strong>（词共现矩阵）。</p>
 <p>个人认为 GloVe方法的重点在于<strong>共现矩阵的统计</strong>和<strong>目标函数的构造</strong>，下面给出其具体实现过程：</p>
-<h2 id="共现矩阵的统计">共现矩阵的统计</h2>
-<p>共现矩阵是通过滑窗在语料库的移动来依次统计滑窗内中心词和上下文词的共现次数，最后将统计数据放入 <span class="math inline">\(V\times V\)</span>（<span class="math inline">\(V\)</span> 是词汇表的大小） 大小的对称矩阵中，该矩阵即为共现矩阵。这篇知乎<a href="#Reference">[4]</a>作者给了一个详细的例子可以用作参考。</p>
-<h2 id="目标函数的构造">目标函数的构造</h2>
-<p>首先定义一些变量：</p>
+<h2 id="共现矩阵的统计"><a href="#共现矩阵的统计" class="headerlink" title="共现矩阵的统计"></a>共现矩阵的统计</h2><p>共现矩阵是通过滑窗在语料库的移动来依次统计滑窗内中心词和上下文词的共现次数，最后将统计数据放入 $V\times V$（$V$ 是词汇表的大小） 大小的对称矩阵中，该矩阵即为共现矩阵。这篇知乎<a href="#Reference">[4]</a>作者给了一个详细的例子可以用作参考。</p>
+<h2 id="目标函数的构造"><a href="#目标函数的构造" class="headerlink" title="目标函数的构造"></a>目标函数的构造</h2><p>首先定义一些变量：</p>
 <ul>
-<li><span class="math inline">\(X_{ij}\)</span> 表示单词 <span class="math inline">\(j\)</span> 出现在单词的上下文中的次数；</li>
-<li><span class="math inline">\(X_i\)</span> 表示单词 <span class="math inline">\(i\)</span> 的上下文中所有单词出现的总次数，即 <span class="math inline">\(X_i=\sum\limits_k X_{ik}\)</span>；</li>
-<li><span class="math inline">\(P_{ij}=P(j|i)=X_{ij}/X_i\)</span>，即表示单词 <span class="math inline">\(j\)</span> 出现在单词 <span class="math inline">\(i\)</span> 的上下文中的概率;</li>
+<li>$X_{ij}$ 表示单词 $j$ 出现在单词的上下文中的次数；</li>
+<li>$X_i$ 表示单词 $i$ 的上下文中所有单词出现的总次数，即 $X_i=\sum\limits_k X_{ik}$；</li>
+<li>$P_{ij}=P(j|i)=X_{ij}/X_i$，即表示单词 $j$ 出现在单词 $i$ 的上下文中的概率;</li>
 </ul>
-<figure>
-<img src="https://i.loli.net/2021/04/16/AL59glFzOYGyfK6.png" alt="glove.PNG" /><figcaption>glove.PNG</figcaption>
-</figure>
-<p>上面表中最后一行的<strong>概率比率</strong>（Ratio）是重点，glove 的主要工作就是要构造函数来拟合它，如下所示： <span class="math display">\[F(w_i,w_j,\widetilde w_k) = \frac{P_{ik}}{P_{jk}}\]</span> 接下来转换为<strong>用向量差值来表示概率比率</strong>（这部分我只能凭直觉理解，参考<a href="#Reference">[5]</a>中的图示也想不出具体理论依据） <span class="math display">\[F(w_i-w_j,\widetilde w_k) = \frac{P_{ik}}{P_{jk}}\]</span> 经过一系列变换（具体过程参考<a href="#Reference">[6]</a>），论文的作者提出下面的等式来近似表示词向量和共现矩阵的关系： <span class="math display">\[w_i^T\widetilde w_j + b_i + \widetilde b_j = log(X_{ij})\]</span> 根据该等式便可以构造出如下目标函数： <span class="math display">\[J=\sum\limits_{i,j=1}^V f(X_{ij})(w_i^T\widetilde w_j + b_i + \widetilde b_j - log(X_{ij}))^2\]</span></p>
-<h1 id="reference">Reference</h1>
-<p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">[1]. scikit-learn中的Text feature extraction部分</a> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/peghoty/p/3857839.html">[2]. word2vec中的数学原理详解</a> <a target="_blank" rel="noopener" href="https://amitness.com/2020/06/fasttext-embeddings/">[3]. A Visual Guide to FastText Word Embeddings</a> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42073620">[4]. （十五）通俗易懂理解——Glove算法原理</a> <a target="_blank" rel="noopener" href="https://towardsdatascience.com/light-on-math-ml-intuitive-guide-to-understanding-glove-embeddings-b13b4f19c010#1823">[5]. Intuitive Guide to Understanding GloVe Embeddings</a> <a target="_blank" rel="noopener" href="http://www.fanyeong.com/2018/02/19/glove-in-detail/">[6]. GloVe详解</a></p>
+<p><img src="https://i.loli.net/2021/04/16/AL59glFzOYGyfK6.png" alt="glove.PNG"></p>
+<p>上面表中最后一行的<strong>概率比率</strong>（Ratio）是重点，glove 的主要工作就是要构造函数来拟合它，如下所示：</p>
+<script type="math/tex; mode=display">F(w_i,w_j,\widetilde w_k) = \frac{P_{ik}}{P_{jk}}</script><p>接下来转换为<strong>用向量差值来表示概率比率</strong>（这部分我只能凭直觉理解，参考<a href="#Reference">[5]</a>中的图示也想不出具体理论依据）</p>
+<script type="math/tex; mode=display">F(w_i-w_j,\widetilde w_k) = \frac{P_{ik}}{P_{jk}}</script><p>经过一系列变换（具体过程参考<a href="#Reference">[6]</a>），论文的作者提出下面的等式来近似表示词向量和共现矩阵的关系：</p>
+<script type="math/tex; mode=display">w_i^T\widetilde w_j + b_i + \widetilde b_j = log(X_{ij})</script><p>根据该等式便可以构造出如下目标函数：</p>
+<script type="math/tex; mode=display">J=\sum\limits_{i,j=1}^V f(X_{ij})(w_i^T\widetilde w_j + b_i + \widetilde b_j - log(X_{ij}))^2</script><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction">[1]. scikit-learn中的Text feature extraction部分</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/peghoty/p/3857839.html">[2]. word2vec中的数学原理详解</a><br><a target="_blank" rel="noopener" href="https://amitness.com/2020/06/fasttext-embeddings/">[3]. A Visual Guide to FastText Word Embeddings</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42073620">[4]. （十五）通俗易懂理解——Glove算法原理</a><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/light-on-math-ml-intuitive-guide-to-understanding-glove-embeddings-b13b4f19c010#1823">[5]. Intuitive Guide to Understanding GloVe Embeddings</a><br><a target="_blank" rel="noopener" href="http://www.fanyeong.com/2018/02/19/glove-in-detail/">[6]. GloVe详解</a></p>
 
     </div>
 

@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiayuanyang.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="2021.4.8 星期四 阴天&#x2F;冷     上午 Bert论文阅读   下午 Bert源码阅读   晚上 排序算法学习       2021.4.9 星期五 阴天&#x2F;冷     8:00~10:10 UNILM论文阅读   10:20~11:24 tokenizer实现学习   11:24~12:20 UNILM">
+<meta name="description" content="2021.4.8 星期四  阴天&#x2F;冷     上午 Bert论文阅读   下午 Bert源码阅读   晚上 排序算法学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日记录&amp;进展">
 <meta property="og:url" content="https://jiayuanyang.com/2021/04/09/%E6%AF%8F%E6%97%A5%E8%AE%B0%E5%BD%95-%E8%BF%9B%E5%B1%95/index.html">
 <meta property="og:site_name" content="Migo&#39;s Blog">
-<meta property="og:description" content="2021.4.8 星期四 阴天&#x2F;冷     上午 Bert论文阅读   下午 Bert源码阅读   晚上 排序算法学习       2021.4.9 星期五 阴天&#x2F;冷     8:00~10:10 UNILM论文阅读   10:20~11:24 tokenizer实现学习   11:24~12:20 UNILM">
+<meta property="og:description" content="2021.4.8 星期四  阴天&#x2F;冷     上午 Bert论文阅读   下午 Bert源码阅读   晚上 排序算法学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-09T02:11:42.000Z">
-<meta property="article:modified_time" content="2021-04-18T09:00:42.743Z">
+<meta property="article:modified_time" content="2021-04-19T03:35:06.525Z">
 <meta property="article:author" content="Migo">
 <meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary">
@@ -89,11 +89,7 @@
   </style>
 </noscript>
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -289,7 +285,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-18 17:00:42" itemprop="dateModified" datetime="2021-04-18T17:00:42+08:00">2021-04-18</time>
+        <time title="修改时间：2021-04-19 11:35:06" itemprop="dateModified" datetime="2021-04-19T11:35:06+08:00">2021-04-19</time>
       </span>
 
   
@@ -309,333 +305,367 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.8</th>
-<th style="text-align: left;">星期四 阴天/冷</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">上午</td>
-<td style="text-align: left;">Bert论文阅读</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">下午</td>
-<td style="text-align: left;">Bert源码阅读</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">晚上</td>
-<td style="text-align: left;">排序算法学习</td>
-</tr>
-</tbody>
-</table>
+        <div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.9</th>
-<th style="text-align: left;">星期五 阴天/冷</th>
+<tr>
+<th style="text-align:left">2021.4.8</th>
+<th style="text-align:left">星期四  阴天/冷</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:00~10:10</td>
-<td style="text-align: left;">UNILM论文阅读</td>
+<tr>
+<td style="text-align:left">上午</td>
+<td style="text-align:left">Bert论文阅读</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">10:20~11:24</td>
-<td style="text-align: left;">tokenizer实现学习</td>
+<tr>
+<td style="text-align:left">下午</td>
+<td style="text-align:left">Bert源码阅读</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">11:24~12:20</td>
-<td style="text-align: left;">UNILM seq2seq实现学习(卡在mask实现)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">12:20~14:20</td>
-<td style="text-align: left;">午饭，《Python聊天机器人开发》10页，午休</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">14:20~18:05</td>
-<td style="text-align: left;">UNILM seq2seq实现学习(卡在损失计算和生成的beam search部分)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">18:05~19:37</td>
-<td style="text-align: left;">晚饭，休息</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">19:37~21:00</td>
-<td style="text-align: left;">实现归并排序代码</td>
+<tr>
+<td style="text-align:left">晚上</td>
+<td style="text-align:left">排序算法学习</td>
 </tr>
 </tbody>
 </table>
+</div>
 <a id="more"></a>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.10</th>
-<th style="text-align: left;">星期六 晴天/暖</th>
+<tr>
+<th style="text-align:left">2021.4.9</th>
+<th style="text-align:left">星期五  阴天/冷</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:10~12:00</td>
-<td style="text-align: left;">UNILM seq2seq实现(最后还剩beam search部分)</td>
+<tr>
+<td style="text-align:left">8:00~10:10</td>
+<td style="text-align:left">UNILM论文阅读</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">14:30~17:03</td>
-<td style="text-align: left;">UNILM seq2seq结束(对话系统闲聊部分)</td>
+<tr>
+<td style="text-align:left">10:20~11:24</td>
+<td style="text-align:left">tokenizer实现学习</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">17:03~17:45</td>
-<td style="text-align: left;">TextBrewer论文下载</td>
+<tr>
+<td style="text-align:left">11:24~12:20</td>
+<td style="text-align:left">UNILM seq2seq实现学习(卡在mask实现)</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">17:45~19:25</td>
-<td style="text-align: left;">晚饭，休息</td>
+<tr>
+<td style="text-align:left">12:20~14:20</td>
+<td style="text-align:left">午饭，《Python聊天机器人开发》10页，午休</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">19:25~21:05</td>
-<td style="text-align: left;">leetcode 493(结果出错)</td>
+<tr>
+<td style="text-align:left">14:20~18:05</td>
+<td style="text-align:left">UNILM seq2seq实现学习(卡在损失计算和生成的beam search部分)</td>
+</tr>
+<tr>
+<td style="text-align:left">18:05~19:37</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:37~21:00</td>
+<td style="text-align:left">实现归并排序代码</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.11</th>
-<th style="text-align: left;">星期日 晴天/暖</th>
+<tr>
+<th style="text-align:left">2021.4.10</th>
+<th style="text-align:left">星期六  晴天/暖</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:30~11:50</td>
-<td style="text-align: left;">TextBrewer论文阅读，熟悉TextBrewer开源工具使用以及下载需要使用的学生模型(rbt3)</td>
+<tr>
+<td style="text-align:left">8:10~12:00</td>
+<td style="text-align:left">UNILM seq2seq实现(最后还剩beam search部分)</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">11:50~14:00</td>
-<td style="text-align: left;">午饭，《Python聊天机器人开发》18页，休息</td>
+<tr>
+<td style="text-align:left">14:30~17:03</td>
+<td style="text-align:left">UNILM seq2seq结束(对话系统闲聊部分)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">14:00~15:42</td>
-<td style="text-align: left;">调整情绪，和家人聊天</td>
+<tr>
+<td style="text-align:left">17:03~17:45</td>
+<td style="text-align:left">TextBrewer论文下载</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">15:42~16:43</td>
-<td style="text-align: left;">继续leetcode 493，找出错误并提交通过</td>
+<tr>
+<td style="text-align:left">17:45~19:25</td>
+<td style="text-align:left">晚饭，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">16:43~17:40</td>
-<td style="text-align: left;">动态规划算法回顾</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">17:40~18:30</td>
-<td style="text-align: left;">晚饭，休息</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">18:30~19:34</td>
-<td style="text-align: left;">高阶DP学习</td>
+<tr>
+<td style="text-align:left">19:25~21:05</td>
+<td style="text-align:left">leetcode 493(结果出错)</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.12</th>
-<th style="text-align: left;">星期一 阴天/适中</th>
+<tr>
+<th style="text-align:left">2021.4.11</th>
+<th style="text-align:left">星期日 晴天/暖</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:25~12:30</td>
-<td style="text-align: left;">TextBrewer知识蒸馏实现</td>
+<tr>
+<td style="text-align:left">8:30~11:50</td>
+<td style="text-align:left">TextBrewer论文阅读，熟悉TextBrewer开源工具使用以及下载需要使用的学生模型(rbt3)</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">12:30~14:30</td>
-<td style="text-align: left;">午饭，休息(状态不是很好)</td>
+<tr>
+<td style="text-align:left">11:50~14:00</td>
+<td style="text-align:left">午饭，《Python聊天机器人开发》18页，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">14:30~18:10</td>
-<td style="text-align: left;">构建闲聊对话训练数据集，修改代码以准备在colab上进行训练</td>
+<tr>
+<td style="text-align:left">14:00~15:42</td>
+<td style="text-align:left">调整情绪，和家人聊天</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">18:10~19:11</td>
-<td style="text-align: left;">晚饭，休息</td>
+<tr>
+<td style="text-align:left">15:42~16:43</td>
+<td style="text-align:left">继续leetcode 493，找出错误并提交通过</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">19:11~20:36</td>
-<td style="text-align: left;">字符串算法学习</td>
+<tr>
+<td style="text-align:left">16:43~17:40</td>
+<td style="text-align:left">动态规划算法回顾</td>
+</tr>
+<tr>
+<td style="text-align:left">17:40~18:30</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">18:30~19:34</td>
+<td style="text-align:left">高阶DP学习</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.13</th>
-<th style="text-align: left;">星期二 晴天/热</th>
+<tr>
+<th style="text-align:left">2021.4.12</th>
+<th style="text-align:left">星期一 阴天/适中</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">7:53~8:28</td>
-<td style="text-align: left;">在colab上微调seq2seq模型(以UNILM的方式用Bert做seq2seq模型)，loss逐渐下降，训练正常进行</td>
+<tr>
+<td style="text-align:left">8:25~12:30</td>
+<td style="text-align:left">TextBrewer知识蒸馏实现</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">8:32~12:23</td>
-<td style="text-align: left;">降低batch size保证在colab上正常微调，《深度学习-自然语言处理实践》P0-P51(从头捋一遍基本概念，但感觉书的内容不是很好)</td>
+<tr>
+<td style="text-align:left">12:30~14:30</td>
+<td style="text-align:left">午饭，休息(状态不是很好)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">12:23~14:15</td>
-<td style="text-align: left;">午饭，休息</td>
+<tr>
+<td style="text-align:left">14:30~18:10</td>
+<td style="text-align:left">构建闲聊对话训练数据集，修改代码以准备在colab上进行训练</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">14:15~17:58</td>
-<td style="text-align: left;">闲聊模型效果不好，怀疑数据集构建方式有问题，重新构建数据集并在colab上重新训练；《深度学习-自然语言处理实践》P51-P56(词向量的部分还要重新过一遍)</td>
+<tr>
+<td style="text-align:left">18:10~19:11</td>
+<td style="text-align:left">晚饭，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">17:58~19:46</td>
-<td style="text-align: left;">晚饭，休息(进度好慢，这些天积累了好多负面情绪，提不起精神😔)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">19:46~20:42</td>
-<td style="text-align: left;">复习词向量相关内容，闲聊模型训练了15个epoch，不准备继续训练了</td>
+<tr>
+<td style="text-align:left">19:11~20:36</td>
+<td style="text-align:left">字符串算法学习</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.14</th>
-<th style="text-align: left;">星期三 晴天/热</th>
+<tr>
+<th style="text-align:left">2021.4.13</th>
+<th style="text-align:left">星期二 晴天/热</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:01~12:04</td>
-<td style="text-align: left;">在colab上对闲聊模型进行知识蒸馏；《自然语言处理实战》P160~P177</td>
+<tr>
+<td style="text-align:left">7:53~8:28</td>
+<td style="text-align:left">在colab上微调seq2seq模型(以UNILM的方式用Bert做seq2seq模型)，loss逐渐下降，训练正常进行</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">12:04~14:03</td>
-<td style="text-align: left;">午饭，《Python聊天机器人开发》24页，休息</td>
+<tr>
+<td style="text-align:left">8:32~12:23</td>
+<td style="text-align:left">降低batch size保证在colab上正常微调，《深度学习-自然语言处理实践》P0-P51(从头捋一遍基本概念，但感觉书的内容不是很好)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">14:03~17:57</td>
-<td style="text-align: left;">调整知识蒸馏参数，效果依然不好；《自然语言处理实战》P177~P190；整理词向量知识点 --&gt; 输出到博客</td>
+<tr>
+<td style="text-align:left">12:23~14:15</td>
+<td style="text-align:left">午饭，休息</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">17:57~18:56</td>
-<td style="text-align: left;">晚饭，休息</td>
+<tr>
+<td style="text-align:left">14:15~17:58</td>
+<td style="text-align:left">闲聊模型效果不好，怀疑数据集构建方式有问题，重新构建数据集并在colab上重新训练；《深度学习-自然语言处理实践》P51-P56(词向量的部分还要重新过一遍)</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">18:56~20:58</td>
-<td style="text-align: left;">调整蒸馏参数重新训练；复习词向量Hierarchical Softmax部分并开始在blog上写word2vec部分</td>
+<tr>
+<td style="text-align:left">17:58~19:46</td>
+<td style="text-align:left">晚饭，休息(进度好慢，这些天积累了好多负面情绪，提不起精神😔)</td>
+</tr>
+<tr>
+<td style="text-align:left">19:46~20:42</td>
+<td style="text-align:left">复习词向量相关内容，闲聊模型训练了15个epoch，不准备继续训练了</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.15</th>
-<th style="text-align: left;">星期四 阴天/凉爽</th>
+<tr>
+<th style="text-align:left">2021.4.14</th>
+<th style="text-align:left">星期三 晴天/热</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:30~11:45</td>
-<td style="text-align: left;">继续训练蒸馏模型，减小学习率且蒸馏温度T=1时，loss终于能够稳定下降；word2vec部分还剩skip-gram没写完</td>
+<tr>
+<td style="text-align:left">8:01~12:04</td>
+<td style="text-align:left">在colab上对闲聊模型进行知识蒸馏；《自然语言处理实战》P160~P177</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">11:15~13:54</td>
-<td style="text-align: left;">午饭，处理杂事，休息</td>
+<tr>
+<td style="text-align:left">12:04~14:03</td>
+<td style="text-align:left">午饭，《Python聊天机器人开发》24页，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">13:55~17:55</td>
-<td style="text-align: left;">colab又自动断掉了，蒸馏模型不准备继续训练了；在博客上完成了word2vec部分的总结</td>
+<tr>
+<td style="text-align:left">14:03~17:57</td>
+<td style="text-align:left">调整知识蒸馏参数，效果依然不好；《自然语言处理实战》P177~P190；整理词向量知识点 —&gt; 输出到博客</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">17:55~19:15</td>
-<td style="text-align: left;">晚饭，休息</td>
+<tr>
+<td style="text-align:left">17:57~18:56</td>
+<td style="text-align:left">晚饭，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">19:15~20:45</td>
-<td style="text-align: left;">leetcode5：最长回文子串 提交结果超时😔</td>
+<tr>
+<td style="text-align:left">18:56~20:58</td>
+<td style="text-align:left">调整蒸馏参数重新训练；复习词向量Hierarchical Softmax部分并开始在blog上写word2vec部分</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.16</th>
-<th style="text-align: left;">星期五 阴天/凉爽</th>
+<tr>
+<th style="text-align:left">2021.4.15</th>
+<th style="text-align:left">星期四 阴天/凉爽</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:22~11:38</td>
-<td style="text-align: left;">FastText部分整理完毕；复习Glove词向量</td>
+<tr>
+<td style="text-align:left">8:30~11:45</td>
+<td style="text-align:left">继续训练蒸馏模型，减小学习率且蒸馏温度T=1时，loss终于能够稳定下降；word2vec部分还剩skip-gram没写完</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">11:38~14:06</td>
-<td style="text-align: left;">午饭，休息；这样的日子快两个月了，最近真的很疲惫，效率不高</td>
+<tr>
+<td style="text-align:left">11:15~13:54</td>
+<td style="text-align:left">午饭，处理杂事，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">14:10~18:00</td>
-<td style="text-align: left;">Glove词向量部分整理完毕</td>
+<tr>
+<td style="text-align:left">13:55~17:55</td>
+<td style="text-align:left">colab又自动断掉了，蒸馏模型不准备继续训练了；在博客上完成了word2vec部分的总结</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">18:00~19:03</td>
-<td style="text-align: left;">晚饭，休息</td>
+<tr>
+<td style="text-align:left">17:55~19:15</td>
+<td style="text-align:left">晚饭，休息</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">19:05~20:00</td>
-<td style="text-align: left;">leetcode5：最长回文子串(解决了超时问题)</td>
+<tr>
+<td style="text-align:left">19:15~20:45</td>
+<td style="text-align:left">leetcode5：最长回文子串  提交结果超时😔</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.17</th>
-<th style="text-align: left;">星期六 阴天/有点儿闷</th>
+<tr>
+<th style="text-align:left">2021.4.16</th>
+<th style="text-align:left">星期五 阴天/凉爽</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">9:00~11:40</td>
-<td style="text-align: left;">学习并整理sentence2vec内容；《Python聊天机器人开发》38页</td>
+<tr>
+<td style="text-align:left">8:22~11:38</td>
+<td style="text-align:left">FastText部分整理完毕；复习Glove词向量</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">11:40~19:00</td>
-<td style="text-align: left;">午饭，休息，回家整理</td>
+<tr>
+<td style="text-align:left">11:38~14:06</td>
+<td style="text-align:left">午饭，休息；这样的日子快两个月了，最近真的很疲惫，效率不高</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">19:00~20:52</td>
-<td style="text-align: left;">leetcode5另一种方法；leetcode10学习</td>
+<tr>
+<td style="text-align:left">14:10~18:00</td>
+<td style="text-align:left">Glove词向量部分整理完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">18:00~19:03</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:05~20:00</td>
+<td style="text-align:left">leetcode5：最长回文子串(解决了超时问题)</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">2021.4.18</th>
-<th style="text-align: left;">星期日 阴天/凉爽</th>
+<tr>
+<th style="text-align:left">2021.4.17</th>
+<th style="text-align:left">星期六 阴天/有点儿闷</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">8:53~17:00</td>
-<td style="text-align: left;">SIF加权整理；解决blog公式乱码的问题；休息+调整</td>
+<tr>
+<td style="text-align:left">9:00~11:40</td>
+<td style="text-align:left">学习并整理sentence2vec内容；《Python聊天机器人开发》38页</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">17:00~22:00</td>
-<td style="text-align: left;">吃饭，回家休息</td>
+<tr>
+<td style="text-align:left">11:40~19:00</td>
+<td style="text-align:left">午饭，休息，回家整理</td>
+</tr>
+<tr>
+<td style="text-align:left">19:00~20:52</td>
+<td style="text-align:left">leetcode5另一种方法；leetcode10学习</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.18</th>
+<th style="text-align:left">星期日 阴天/凉爽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:53~17:00</td>
+<td style="text-align:left">SIF加权整理；解决blog公式乱码的问题；休息+调整</td>
+</tr>
+<tr>
+<td style="text-align:left">17:00~22:00</td>
+<td style="text-align:left">吃饭，回家休息</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.19</th>
+<th style="text-align:left">星期一 阴天/凉爽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:40~</td>
+<td style="text-align:left">Item Two</td>
+</tr>
+</tbody>
+</table>
+</div>
 
     </div>
 
