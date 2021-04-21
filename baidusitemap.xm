@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jiayuanyang.com/2021/04/17/Sentence-Embedding/</loc>
-    <lastmod>2021-04-19</lastmod>
+    <lastmod>2021-04-21</lastmod>
   </url>
   <url>
     <loc>https://jiayuanyang.com/2021/04/09/%E6%AF%8F%E6%97%A5%E8%AE%B0%E5%BD%95-%E8%BF%9B%E5%B1%95/</loc>
+    <lastmod>2021-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://jiayuanyang.com/2021/03/15/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-leetcode/</loc>
     <lastmod>2021-04-19</lastmod>
   </url>
   <url>
     <loc>https://jiayuanyang.com/2021/03/12/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%BE%85%E8%A7%A3%E5%86%B3%EF%BC%89/</loc>
-    <lastmod>2021-04-19</lastmod>
-  </url>
-  <url>
-    <loc>https://jiayuanyang.com/2021/03/15/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-leetcode/</loc>
     <lastmod>2021-04-19</lastmod>
   </url>
   <url>
