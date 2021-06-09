@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/youshen-apple.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/youshen-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/youshen-16x16.png">
+  <link rel="mask-icon" href="/images/youshen-512x512.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayuanyang.com","root":"/","images":"/images","scheme":"Muse","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="养成自顶向下的编程习惯，参考,类似写报纸新闻一样，主要逻辑放在最上面（新闻标题 ——&gt; 主函数），后面再写具体的细节（正文 ——&gt; 具体的功能子函数） 时间复杂度和空间复杂度：这部分看到具体的代码能够说出来即可（找主要语句的执行次数） 面试时要和面试官把题目的意思和边界条件明确（不要害怕沟通），尽可能想出自己能力范围内的所有解法，然后比较他们之间的时间和空间复杂度，最后写出的最优的解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法和数据结构复习">
+<meta property="og:url" content="https://jiayuanyang.com/2021/05/12/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Migo&#39;s Blog">
+<meta property="og:description" content="养成自顶向下的编程习惯，参考,类似写报纸新闻一样，主要逻辑放在最上面（新闻标题 ——&gt; 主函数），后面再写具体的细节（正文 ——&gt; 具体的功能子函数） 时间复杂度和空间复杂度：这部分看到具体的代码能够说出来即可（找主要语句的执行次数） 面试时要和面试官把题目的意思和边界条件明确（不要害怕沟通），尽可能想出自己能力范围内的所有解法，然后比较他们之间的时间和空间复杂度，最后写出的最优的解决">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-12T09:02:50.000Z">
+<meta property="article:modified_time" content="2021-06-09T03:03:43.325Z">
+<meta property="article:author" content="Migo">
+<meta property="article:tag" content="leetcode">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiayuanyang.com/2021/05/12/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>算法和数据结构复习 | Migo's Blog</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <a target="_blank" rel="noopener" href="https://github.com/YJY123" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Migo's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E3%80%81%E8%B7%B3%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">数组、链表、跳表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E3%80%81%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">栈、队列、双端队列、优先队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E3%80%81%E6%98%A0%E5%B0%84%E3%80%81%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">哈希表、映射、集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">树、二叉树、二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E9%80%92%E5%BD%92%E3%80%81%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92"><span class="nav-number">5.</span> <span class="nav-text">泛型递归、树的递归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%B2%BB%E3%80%81%E5%9B%9E%E6%BA%AF%EF%BC%88Divide-amp-Conquer%E3%80%81Backtracking%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">分治、回溯（Divide &amp; Conquer、Backtracking）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">7.</span> <span class="nav-text">深度优先搜索和广度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">7.1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">7.2.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Migo"
+      src="/images/youshen-avatar.gif">
+  <p class="site-author-name" itemprop="name">Migo</p>
+  <div class="site-description" itemprop="description">Migo的博客</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/YJY123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;YJY123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiayuanyang.com/2021/05/12/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/youshen-avatar.gif">
+      <meta itemprop="name" content="Migo">
+      <meta itemprop="description" content="Migo的博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Migo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法和数据结构复习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-12 17:02:50" itemprop="dateCreated datePublished" datetime="2021-05-12T17:02:50+08:00">2021-05-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-09 11:03:43" itemprop="dateModified" datetime="2021-06-09T11:03:43+08:00">2021-06-09</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>养成自顶向下的编程习惯，<a target="_blank" rel="noopener" href="https://www.markhneedham.com/blog/2008/09/15/clean-code-book-review/">参考</a>,类似写报纸新闻一样，主要逻辑放在最上面（新闻标题 ——&gt; 主函数），后面再写具体的细节（正文 ——&gt; 具体的功能子函数）</p>
+<p>时间复杂度和空间复杂度：这部分看到具体的代码能够说出来即可（找主要语句的执行次数）</p>
+<p>面试时要和面试官把题目的意思和边界条件明确（不要害怕沟通），尽可能想出自己能力范围内的所有解法，然后比较他们之间的时间和空间复杂度，最后写出的最优的解决方案。</p>
+<a id="more"></a>
+<p>主定理（Master Theorem）：用来解决所有递归问题（递归函数）的时间复杂度<br>主要记住四种常用的即可—-二分查找[一维]、二叉树遍历、排好序的矩阵中进行二分查找[二维]、归并排序<br>（公式可以看相关课件）</p>
+<p>通过主定理可知：<br>二叉树的前序、中序、后序遍历，图的遍历以及搜索算法（DFS、BFS）的时间复杂度均为 $O(n)$<br>二分查找：时间复杂度是多少？ $O(log(n))$</p>
+<h1 id="数组、链表、跳表"><a href="#数组、链表、跳表" class="headerlink" title="数组、链表、跳表"></a>数组、链表、跳表</h1><p>数组 查询时间复杂度 $O(1)$   插入和删除操作 $O(n)$<br>链表 查询时间复杂度 $O(n)$   插入和删除操作 $O(1)$<br>为了降低链表的查询时间复杂度 ——-&gt; 跳表（跳表只需理解原理，面试不太会出题考）<br><strong>跳表的核心思想：升维（空间换时间）</strong><br>跳表的维护成本很高，插入和删除元素都需要重新更新索引，所以时间复杂度为 $O(logn)$<br>跳表的空间复杂度为 $O(n)$</p>
+<p><strong>解题秘籍：</strong></p>
+<blockquote>
+<p>1.找最近重复子问题</p>
+</blockquote>
+<h1 id="栈、队列、双端队列、优先队列"><a href="#栈、队列、双端队列、优先队列" class="headerlink" title="栈、队列、双端队列、优先队列"></a>栈、队列、双端队列、优先队列</h1><p>栈（stack）: 先入后出，添加、删除皆为 $O(1)$，查询为 $O(n)$<br>队列（queue）: 先入先出，添加、删除皆为 $O(1)$，查询为 $O(n)$<br>双端队列（Deque: Double-End Queue）: 特殊的队列，头和尾都可以进行出和入；添加、删除皆为 $O(1)$，查询为 $O(n)$<br>优先队列（Priority Queue）: 插入操作为$O(1)$，取出操作为$O(logN)$ - 按照元素的优先级取出</p>
+<p><strong>具有最近相关性的问题 —-&gt; 栈（类比为剥洋葱）</strong></p>
+<h1 id="哈希表、映射、集合"><a href="#哈希表、映射、集合" class="headerlink" title="哈希表、映射、集合"></a>哈希表、映射、集合</h1><p>哈希表：要存储的对象（例如：字符串）通过哈希函数得到一个下标，该对象按照下标进行存储，所以查询、插入（添加）和删除操作为 $O(1)$</p>
+<p>对于 python 语言，hash table 抽象出来即为 dict(或者 json)和 set</p>
+<h1 id="树、二叉树、二叉搜索树"><a href="#树、二叉树、二叉搜索树" class="headerlink" title="树、二叉树、二叉搜索树"></a>树、二叉树、二叉搜索树</h1><p>二叉树：每个结点都只有左右两个子结点<br>树和图的区别在于：树是无环的，而图是有环的</p>
+<p><strong>Linked List 是特殊化的 Tree<br>Tree 是特殊化的 Graph</strong></p>
+<p><strong>二叉树遍历 Pre-order/In-order/Post-order</strong>（很重要）<br>1.前序（Pre-order）：根-左-右<br>2.中序（In-order）：左-根-右<br>3.后序（Post-order）：左-右-根</p>
+<p><strong>二叉搜索树 Binary Search Tree</strong><br>二叉搜索树是指一棵空树或者具有下列性质的二叉树：</p>
+<ol>
+<li>左子树上<strong>所有结点</strong>的值均小于它的根结点的值；</li>
+<li>右子树上<strong>所有结点</strong>的值均大于它的根结点的值；</li>
+<li>以此类推：左、右子树也分别为二叉查找树。 （这就是 重复性！）<br>其查询，插入和删除操作的时间复杂度均为 $O(log(n))$</li>
+</ol>
+<blockquote>
+<p>二叉搜索树的中序遍历：升序排列</p>
+</blockquote>
+<h1 id="泛型递归、树的递归"><a href="#泛型递归、树的递归" class="headerlink" title="泛型递归、树的递归"></a>泛型递归、树的递归</h1><p>树的面试题解法一般都是递归(树结构本身的定义以及其重复性)</p>
+<blockquote>
+<p>递归 - 循环<br>通过函数体来进行的循环</p>
+</blockquote>
+<p>Python 代码模版<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recursion</span>(<span class="params">level, param1, param2, ...</span>):</span></span><br><span class="line">    <span class="comment"># recursion terminator</span></span><br><span class="line">    <span class="keyword">if</span> level &gt; MAX_LEVEL:</span><br><span class="line">    process_result</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># process logic in current level</span></span><br><span class="line">    process(level, data...)</span><br><span class="line">    <span class="comment"># drill down</span></span><br><span class="line">    self.recursion(level + <span class="number">1</span>, p1, ...)</span><br><span class="line">    <span class="comment"># reverse the current level status if needed</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="分治、回溯（Divide-amp-Conquer、Backtracking）"><a href="#分治、回溯（Divide-amp-Conquer、Backtracking）" class="headerlink" title="分治、回溯（Divide &amp; Conquer、Backtracking）"></a>分治、回溯（Divide &amp; Conquer、Backtracking）</h1><p>可以认为分治和回溯是一种特殊的递归<br><strong>最近重复性 —-&gt; 分治，回溯</strong><br><strong>最优重复性 —-&gt; 动态规划</strong></p>
+<h1 id="深度优先搜索和广度优先搜索"><a href="#深度优先搜索和广度优先搜索" class="headerlink" title="深度优先搜索和广度优先搜索"></a>深度优先搜索和广度优先搜索</h1><p>搜索-遍历</p>
+<ul>
+<li>每个节点都要访问一次</li>
+<li>每个节点仅仅要访问一次</li>
+<li>对于节点的访问顺序不限<br>深度优先：depth first search —-&gt; <strong>栈</strong><br>广度优先：breadth first search —-&gt; <strong>队列</strong></li>
+</ul>
+<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><p>示例代码-二叉树遍历<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node</span>):</span></span><br><span class="line">    <span class="keyword">if</span> node <span class="keyword">in</span> visited:</span><br><span class="line">        <span class="comment"># already visited</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    visited.add(node)</span><br><span class="line">    <span class="comment"># process current node</span></span><br><span class="line">    <span class="comment"># ... # logic here</span></span><br><span class="line">    dfs(node.left)</span><br><span class="line">    dfs(node.right)</span><br></pre></td></tr></table></figure></p>
+<p>示例代码-多叉树遍历（递归写法）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">visited = <span class="built_in">set</span>()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node, visited</span>):</span></span><br><span class="line">    <span class="keyword">if</span> node <span class="keyword">in</span> visited: <span class="comment"># terminator</span></span><br><span class="line">        <span class="comment"># already visited</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    visited.add(node)</span><br><span class="line">    <span class="comment"># process current node here.</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> next_node <span class="keyword">in</span> node.children():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_node <span class="keyword">in</span> visited:</span><br><span class="line">            dfs(next_node, visited)</span><br></pre></td></tr></table></figure></p>
+<p>示例代码-树的遍历（非递归写法）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DFS</span>(<span class="params">self, tree</span>):</span></span><br><span class="line">    <span class="keyword">if</span> tree.root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    visited, stack = [], [tree.root]</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        node = stack.pop()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        process (node)</span><br><span class="line">        nodes = generate_related_nodes(node)</span><br><span class="line">        stack.push(nodes)</span><br><span class="line">    <span class="comment"># other processing work</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>示例代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BFS</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([start])</span><br><span class="line">    visited.add(start)</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        node = queue.pop()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        process(node)</span><br><span class="line">        nodes = generate_related_nodes(node)</span><br><span class="line">        queue.push(nodes)</span><br><span class="line">    <span class="comment"># other processing work</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-fish"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"><i class="fa fa-tag"></i> leetcode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/17/Sentence-Embedding/" rel="prev" title="Sentence Embedding">
+                  <i class="fa fa-chevron-left"></i> Sentence Embedding
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Migo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  
+
+
+</body>
+</html>

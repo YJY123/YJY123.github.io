@@ -31,7 +31,7 @@
 <meta property="og:description" content="2021.4.8 星期四  阴天&#x2F;冷     上午 Bert论文阅读   下午 Bert源码阅读   晚上 排序算法学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-09T02:11:42.000Z">
-<meta property="article:modified_time" content="2021-04-21T05:35:38.310Z">
+<meta property="article:modified_time" content="2021-06-09T02:07:59.304Z">
 <meta property="article:author" content="Migo">
 <meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -285,7 +285,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-21 13:35:38" itemprop="dateModified" datetime="2021-04-21T13:35:38+08:00">2021-04-21</time>
+        <time title="修改时间：2021-06-09 10:07:59" itemprop="dateModified" datetime="2021-06-09T10:07:59+08:00">2021-06-09</time>
       </span>
 
   
@@ -724,7 +724,935 @@
 <td style="text-align:left">午饭，休息</td>
 </tr>
 <tr>
-<td style="text-align:left">13:35~</td>
+<td style="text-align:left">13:35~14:17</td>
+<td style="text-align:left">Universal Sentence Encoder部分整理完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">14:20~18:00</td>
+<td style="text-align:left">对话系统意图识别模块梳理</td>
+</tr>
+<tr>
+<td style="text-align:left">18:00~19:26</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:26~19:45</td>
+<td style="text-align:left">对话系统意图识别模块梳理完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">19:45~20:51</td>
+<td style="text-align:left">字符串匹配算法 暴力法和Rabin-Karp学完，但 KMP 算法还需要再研究一下</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.22</th>
+<th style="text-align:left">星期四 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:59~11:42</td>
+<td style="text-align:left">对话系统梳理（Embedding + HNSW）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:48~14:00</td>
+<td style="text-align:left">午饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">14:00~17:58</td>
+<td style="text-align:left">对话系统梳理（精排数据处理+人工特征+深度匹配特征）</td>
+</tr>
+<tr>
+<td style="text-align:left">18:02~19:25</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:25~21:09</td>
+<td style="text-align:left">KMP 算法原理弄懂了，但是具体实现还要再研究，看了一个讲解next数组的视频还是云里雾里😶</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.23</th>
+<th style="text-align:left">星期五 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:07~9:47</td>
+<td style="text-align:left">解决微调 BertForSequenceClassification 模型针对相同数据每次预测结果不同的问题: 将 self.model.load_state_dict(checkpoint, strict=False) 改为 <strong>self.model.load_state_dict(checkpoint[“model”])</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">9:47~10:35</td>
+<td style="text-align:left">之前训练 lgb 模型的数据有问题，修改代码准备中午重新生成一份训练数据</td>
+</tr>
+<tr>
+<td style="text-align:left">10:35~11:56</td>
+<td style="text-align:left">机器学习-线性回归（学习和整理）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:56~14:02</td>
+<td style="text-align:left">午饭，休息，新的特征数据终于跑出来了，感觉人工特征效果很差，还不如直接用bert匹配的概率结果做特征</td>
+</tr>
+<tr>
+<td style="text-align:left">14:05~16:58</td>
+<td style="text-align:left">机器学习-线性回归部分学习完毕；基于中午新生成的特征数据重新训练了 lgb 模型</td>
+</tr>
+<tr>
+<td style="text-align:left">17:00~17:59</td>
+<td style="text-align:left">KMP 算法代码实现研究</td>
+</tr>
+<tr>
+<td style="text-align:left">18:00~19:05</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:05~20:29</td>
+<td style="text-align:left">KMP 算法原理和代码实现全部弄懂了😀</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.24</th>
+<th style="text-align:left">星期六 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:06~11:38</td>
+<td style="text-align:left">完成任务型对话系统的整合模块，针对每个query拿到了对应的k个召回结果（粗排）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:40~14:16</td>
+<td style="text-align:left">午饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">14:20~16:14</td>
+<td style="text-align:left">利用训练好的 lgb 模型对每个query-retrieved pair进⾏评分，拿到最终利用 FAQ 查询库获得的精排结果</td>
+</tr>
+<tr>
+<td style="text-align:left">16:14~17:57</td>
+<td style="text-align:left">南怀瑾选集第八卷-金刚经说什么 P1~16</td>
+</tr>
+<tr>
+<td style="text-align:left">17:57~18:44</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">18:44~20:43</td>
+<td style="text-align:left">南怀瑾选集第八卷-金刚经说什么 P17~34</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.25</th>
+<th style="text-align:left">星期日 阴天/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:50~12:08</td>
+<td style="text-align:left">笔记本电源和书昨晚被图书馆管理员收走了，得契机又看了一上午《南怀瑾选集第八卷-金刚经说什么》P34~60</td>
+</tr>
+<tr>
+<td style="text-align:left">18:46~20:40</td>
+<td style="text-align:left">《南怀瑾选集第八卷-金刚经说什么》P61~81</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.26</th>
+<th style="text-align:left">星期一 阴天/凉爽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:00~8:26</td>
+<td style="text-align:left">多轮对话系统项目大概梳理完毕了，但是Bert闲聊模型有时间可以再用<strong>LCCC</strong>语料库继续训练一下，此外<strong>多轮对话管理</strong>的资料抽时间也要了解一下</td>
+</tr>
+<tr>
+<td style="text-align:left">8:28~11:43</td>
+<td style="text-align:left">机器学习-线性分类（学习和整理）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:43~14:08</td>
+<td style="text-align:left">午饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">14:10~18:10</td>
+<td style="text-align:left">机器学习-线性分类(逻辑回归，高斯判别分析)</td>
+</tr>
+<tr>
+<td style="text-align:left">18:10~18:50</td>
+<td style="text-align:left">晚饭</td>
+</tr>
+<tr>
+<td style="text-align:left">19:00~20:49</td>
+<td style="text-align:left">机器学习-线性分类(朴素贝叶斯)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.28</th>
+<th style="text-align:left">星期三 阴天/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:06~9:38</td>
+<td style="text-align:left">机器学习-线性分类(朴素贝叶斯)</td>
+</tr>
+<tr>
+<td style="text-align:left">9:38~11:45</td>
+<td style="text-align:left">机器学习-降维</td>
+</tr>
+<tr>
+<td style="text-align:left">11:45~13:49</td>
+<td style="text-align:left">午睡，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">13:50~17:54</td>
+<td style="text-align:left">机器学习-降维 &amp; SVM</td>
+</tr>
+<tr>
+<td style="text-align:left">18:00~19:26</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:27~20:53</td>
+<td style="text-align:left">机器学习-SVM (硬间隔模型)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.29</th>
+<th style="text-align:left">星期四 雨天/凉爽</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:20~11:30</td>
+<td style="text-align:left">机器学习-SVM (软间隔模型)，弱对偶性证明</td>
+</tr>
+<tr>
+<td style="text-align:left">11:40~14:13</td>
+<td style="text-align:left">午饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">14:15~17:49</td>
+<td style="text-align:left">机器学习-核函数</td>
+</tr>
+<tr>
+<td style="text-align:left">17:50~19:40</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:40~20:50</td>
+<td style="text-align:left">机器学习-核函数 &amp; 指数族分布</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.4.30</th>
+<th style="text-align:left">星期五 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:09~11:50</td>
+<td style="text-align:left">机器学习-指数族分布</td>
+</tr>
+<tr>
+<td style="text-align:left">11:50~14:30</td>
+<td style="text-align:left">午饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">14:30~17:53</td>
+<td style="text-align:left">机器学习-指数族分布 &amp; 概率图模型</td>
+</tr>
+<tr>
+<td style="text-align:left">17:55~20:00</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">20:00~21:19</td>
+<td style="text-align:left">机器学习-概率图模型</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.6</th>
+<th style="text-align:left">星期四 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">9:00~11:46</td>
+<td style="text-align:left">机器学习-概率图模型</td>
+</tr>
+<tr>
+<td style="text-align:left">11:50~14:03</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:03~17:51</td>
+<td style="text-align:left">机器学习-概率图模型</td>
+</tr>
+<tr>
+<td style="text-align:left">18:00~18:57</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:00~20:43</td>
+<td style="text-align:left">机器学习-概率图模型 &amp; EM算法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.7</th>
+<th style="text-align:left">星期五 晴天/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:55~11:42</td>
+<td style="text-align:left">机器学习-EM算法</td>
+</tr>
+<tr>
+<td style="text-align:left">11:45~14:10</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:10~17:36</td>
+<td style="text-align:left">机器学习-EM算法</td>
+</tr>
+<tr>
+<td style="text-align:left">17:40~19:13</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:15~20:31</td>
+<td style="text-align:left">机器学习-变分推断</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.8</th>
+<th style="text-align:left">星期六 阴天/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:05~12:06</td>
+<td style="text-align:left">机器学习-变分推断</td>
+</tr>
+<tr>
+<td style="text-align:left">12:06~14:26</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:26~17:46</td>
+<td style="text-align:left">机器学习-变分推断 &amp; MCMC采样</td>
+</tr>
+<tr>
+<td style="text-align:left">17:50~19:00</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:00~20:11</td>
+<td style="text-align:left">机器学习-MCMC采样</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.10</th>
+<th style="text-align:left">星期一 阴天/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:55~11:33</td>
+<td style="text-align:left">机器学习-MCMC采样 &amp; HMM</td>
+</tr>
+<tr>
+<td style="text-align:left">11:33~13:40</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:40~17:51</td>
+<td style="text-align:left">机器学习-HMM</td>
+</tr>
+<tr>
+<td style="text-align:left">17:51~18:50</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">18:50~20:41</td>
+<td style="text-align:left">机器学习-HMM</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.11</th>
+<th style="text-align:left">星期二 多云/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:55~11:43</td>
+<td style="text-align:left">机器学习-卡尔曼滤波 &amp; 粒子滤波</td>
+</tr>
+<tr>
+<td style="text-align:left">11:43~14:27</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:30~17:48</td>
+<td style="text-align:left">机器学习-CRF</td>
+</tr>
+<tr>
+<td style="text-align:left">17:50~19:17</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:17~20:47</td>
+<td style="text-align:left">机器学习-CRF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.12</th>
+<th style="text-align:left">星期三 阴/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:44~11:40</td>
+<td style="text-align:left">机器学习-CRF</td>
+</tr>
+<tr>
+<td style="text-align:left">11:40~13:37</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:37~14:56</td>
+<td style="text-align:left">机器学习-CRF(完结)，还剩树模型部分没有学习</td>
+</tr>
+<tr>
+<td style="text-align:left">14:56~15:25</td>
+<td style="text-align:left">整理纸质笔记并排序</td>
+</tr>
+<tr>
+<td style="text-align:left">15:25~16:09</td>
+<td style="text-align:left">整理并上传对话系统项目到GitHub上</td>
+</tr>
+<tr>
+<td style="text-align:left">16:10~17:40</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 时间复杂度和空间复杂度</td>
+</tr>
+<tr>
+<td style="text-align:left">17:40~19:00</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:00~20:41</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 数组、链表和跳表  leetcode 283 11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.13</th>
+<th style="text-align:left">星期四 多云/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:51~11:36</td>
+<td style="text-align:left">回顾营销文本生成项目</td>
+</tr>
+<tr>
+<td style="text-align:left">11:36~13:45</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:45~16:45</td>
+<td style="text-align:left">PGN 模型代码看到 attention 部分</td>
+</tr>
+<tr>
+<td style="text-align:left">16:45~18:00</td>
+<td style="text-align:left">leetcode 70 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.14</th>
+<th style="text-align:left">星期五 多云/闷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:00~11:40</td>
+<td style="text-align:left">回顾营销文本生成项目—准备训练baseline模型</td>
+</tr>
+<tr>
+<td style="text-align:left">11:40~14:00</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:00~17:44</td>
+<td style="text-align:left">训练baseline, beamsearch还剩一点内容</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~19:12</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:12~21:06</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 数组、链表和跳表  leetcode 15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.15</th>
+<th style="text-align:left">星期六 有点云/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:53~11:30</td>
+<td style="text-align:left">营销文本生成项目—模型训练（colab又一次自动断掉GPU资源😂）、beamsearch和rouge评价指标部分结束</td>
+</tr>
+<tr>
+<td style="text-align:left">11:40~13:40</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:50~17:30</td>
+<td style="text-align:left">营销文本生成项目—数据增强部分（缓慢的生成新样本—-&gt;1.单词替换 2.回译） 还剩优化技巧部分（Weight tying，Scheduled sampling）</td>
+</tr>
+<tr>
+<td style="text-align:left">17:30~17:45</td>
+<td style="text-align:left">找出以前的毕业论文和资料，着手回顾复习强化学习</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~19:20</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:20~20:51</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 数组、链表和跳表  leetcode 206</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.16</th>
+<th style="text-align:left">星期日 晴/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:55~11:46</td>
+<td style="text-align:left">营销文本生成项目结束回顾（还剩模型训练和结果对比）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:50~13:40</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:50~17:20</td>
+<td style="text-align:left">强化学习复习，文本生成模型训练（模型评估结果需要明天重新运行）</td>
+</tr>
+<tr>
+<td style="text-align:left">17:20~明天</td>
+<td style="text-align:left">给自己点时间休息一下😀</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.19</th>
+<th style="text-align:left">星期三 多云/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:51~11:30</td>
+<td style="text-align:left">训练模型（带训练优化的PGN），项目一回顾</td>
+</tr>
+<tr>
+<td style="text-align:left">11:35~13:37</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:40~17:43</td>
+<td style="text-align:left">项目一 —-&gt; 特征工程（想办法拿到特征结果）</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~19:15</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:20~20:48</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 数组、链表和跳表  leetcode 24、141</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.20</th>
+<th style="text-align:left">星期四 阴天/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:59~11:30</td>
+<td style="text-align:left">跑出带训练优化的PGN模型的评测结果，天池比赛回顾</td>
+</tr>
+<tr>
+<td style="text-align:left">11:30~13:48</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:48~17:43</td>
+<td style="text-align:left">面试准备 —-&gt; 复习评价指标</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~18:31</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">18:31~19:48</td>
+<td style="text-align:left">多标签和多分类的AUC计算 sklearn实现还是没弄懂</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.21</th>
+<th style="text-align:left">星期五 阴天/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:54~10:53</td>
+<td style="text-align:left">PGN + coverage模型训练，天池比赛回顾结束</td>
+</tr>
+<tr>
+<td style="text-align:left">10:54~11:33</td>
+<td style="text-align:left">硕士毕设回顾</td>
+</tr>
+<tr>
+<td style="text-align:left">11:35~14:25</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:30~17:31</td>
+<td style="text-align:left">硕士毕设回顾（看到3.1小节）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.24</th>
+<th style="text-align:left">星期一 多云/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:54~11:30</td>
+<td style="text-align:left">PGN + coverage (fine-tune)模型跑出评价指标结果，硕士毕设回顾（看到4.1.1）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:32~13:42</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:42~15:01</td>
+<td style="text-align:left">硕士毕设回顾结束</td>
+</tr>
+<tr>
+<td style="text-align:left">15:02~15:52</td>
+<td style="text-align:left">整理文本生成项目并上传到 github</td>
+</tr>
+<tr>
+<td style="text-align:left">16:11~17:34</td>
+<td style="text-align:left">梳理图书分类的特征数据</td>
+</tr>
+<tr>
+<td style="text-align:left">17:35~19:08</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:09~20:40</td>
+<td style="text-align:left">做明天生成图书分类特征的准备</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.25</th>
+<th style="text-align:left">星期二 雷雨/闷热潮湿</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:05~12:12</td>
+<td style="text-align:left">生成图书分类需要的词嵌入特征（百度 AI studio）</td>
+</tr>
+<tr>
+<td style="text-align:left">12:15~14:10</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">14:10~16:40</td>
+<td style="text-align:left">已经生成了训练所需的全部特征，还需要从colab上下载并上传到百度 AI Studio</td>
+</tr>
+<tr>
+<td style="text-align:left">16:40~17:42</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 数组、链表和跳表  leetcode 142</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~19:25</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:30~20:45</td>
+<td style="text-align:left">leetcode 25(还有点小问题)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.5.28</th>
+<th style="text-align:left">星期五 多云/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:08~11:32</td>
+<td style="text-align:left">训练 lightgbm 多分类模型，复习参数搜索相关内容（网格搜索&amp;贝叶斯优化）</td>
+</tr>
+<tr>
+<td style="text-align:left">11:35~13:40</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:45~17:30</td>
+<td style="text-align:left">心好乱啊，定不下来  (勉强看完BayesianOptimization的两个tour notebook)</td>
+</tr>
+<tr>
+<td style="text-align:left">17:30~19:30</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:30~20:55</td>
+<td style="text-align:left">leetcode 25 的小问题终于解决了</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.6.3</th>
+<th style="text-align:left">星期四 多云/热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:55~9:50</td>
+<td style="text-align:left">回顾并实现贝叶斯优化，在AI studio上利用贝叶斯优化寻找lightgbm的最优参数（估计8个小时根本跑不完）</td>
+</tr>
+<tr>
+<td style="text-align:left">10:05~11:35</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 栈、队列、双端队列、优先队列 + leetcode 20</td>
+</tr>
+<tr>
+<td style="text-align:left">11:35~13:45</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:45~17:44</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 栈、队列、双端队列、优先队列 + leetcode 155,84,239,641</td>
+</tr>
+<tr>
+<td style="text-align:left">17:45~19:20</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">19:20~20:51</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 栈、队列、双端队列、优先队列 + leetcode 42</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.6.4</th>
+<th style="text-align:left">星期五 阴天/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:58~11:30</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 哈希表、映射、集合/树、二叉树、二叉搜索树 + leetcode 242,49,1,94,144</td>
+</tr>
+<tr>
+<td style="text-align:left">11:35~13:40</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:45~17:40</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 泛型递归、树的递归 + leetcode 145,590,589,429,70,22,226</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.6.8</th>
+<th style="text-align:left">星期二 多云/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">8:03~8:48</td>
+<td style="text-align:left">根据贝叶斯优化得到的最优参数，训练最终的图书分类模型</td>
+</tr>
+<tr>
+<td style="text-align:left">8:50~11:30</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 泛型递归、树的递归 + leetcode 98,104,111,297</td>
+</tr>
+<tr>
+<td style="text-align:left">11:30~13:35</td>
+<td style="text-align:left">午饭，午休</td>
+</tr>
+<tr>
+<td style="text-align:left">13:40~17:28</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 泛型递归、树的递归 + leetcode 236,105,77,46,47；模型训练完毕并得到在测试集上的评价指标</td>
+</tr>
+<tr>
+<td style="text-align:left">17:35~18:47</td>
+<td style="text-align:left">晚饭，休息</td>
+</tr>
+<tr>
+<td style="text-align:left">18:50~20:54</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 分治、回溯 + leetcode 50；整理图书分类代码并上传github</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">2021.6.9</th>
+<th style="text-align:left">星期三 多云/闷热</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">7:56~10:06</td>
+<td style="text-align:left">算法和数据结构复习—-&gt; 分治、回溯 + leetcode 78,169,17,51</td>
+</tr>
+<tr>
+<td style="text-align:left">10:08~</td>
 </tr>
 </tbody>
 </table>
