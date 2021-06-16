@@ -30,11 +30,15 @@
 <meta property="og:site_name" content="Migo&#39;s Blog">
 <meta property="og:description" content="养成自顶向下的编程习惯，参考,类似写报纸新闻一样，主要逻辑放在最上面（新闻标题 ——&gt; 主函数），后面再写具体的细节（正文 ——&gt; 具体的功能子函数） 时间复杂度和空间复杂度：这部分看到具体的代码能够说出来即可（找主要语句的执行次数） 面试时要和面试官把题目的意思和边界条件明确（不要害怕沟通），尽可能想出自己能力范围内的所有解法，然后比较他们之间的时间和空间复杂度，最后写出的最优的解决">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/06/15/uIH2pZO1F8dsocv.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/16/aKkRyQg7w8JZuiB.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/16/TGtfdDeHanovym4.png">
 <meta property="article:published_time" content="2021-05-12T09:02:50.000Z">
-<meta property="article:modified_time" content="2021-06-09T03:03:43.325Z">
+<meta property="article:modified_time" content="2021-06-16T12:25:38.723Z">
 <meta property="article:author" content="Migo">
 <meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/06/15/uIH2pZO1F8dsocv.png">
 
 
 <link rel="canonical" href="https://jiayuanyang.com/2021/05/12/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/">
@@ -181,7 +185,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E3%80%81%E8%B7%B3%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">数组、链表、跳表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E3%80%81%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">栈、队列、双端队列、优先队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E3%80%81%E6%98%A0%E5%B0%84%E3%80%81%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">哈希表、映射、集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">树、二叉树、二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E9%80%92%E5%BD%92%E3%80%81%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92"><span class="nav-number">5.</span> <span class="nav-text">泛型递归、树的递归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%B2%BB%E3%80%81%E5%9B%9E%E6%BA%AF%EF%BC%88Divide-amp-Conquer%E3%80%81Backtracking%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">分治、回溯（Divide &amp; Conquer、Backtracking）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">7.</span> <span class="nav-text">深度优先搜索和广度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">7.1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">7.2.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E9%93%BE%E8%A1%A8%E3%80%81%E8%B7%B3%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">数组、链表、跳表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E3%80%81%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">栈、队列、双端队列、优先队列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%E3%80%81%E6%98%A0%E5%B0%84%E3%80%81%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">哈希表、映射、集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">树、二叉树、二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E9%80%92%E5%BD%92%E3%80%81%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92"><span class="nav-number">5.</span> <span class="nav-text">泛型递归、树的递归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%B2%BB%E3%80%81%E5%9B%9E%E6%BA%AF%EF%BC%88Divide-amp-Conquer%E3%80%81Backtracking%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">分治、回溯（Divide &amp; Conquer、Backtracking）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">7.</span> <span class="nav-text">深度优先搜索和广度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">7.1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">7.2.</span> <span class="nav-text">BFS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">贪心算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">9.</span> <span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">10.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%A0%91%E5%92%8C%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-number">11.</span> <span class="nav-text">字典树和并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%A0%91-trie"><span class="nav-number">11.1.</span> <span class="nav-text">字典树(trie)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86-Disjoint-Set"><span class="nav-number">11.2.</span> <span class="nav-text">并查集(Disjoint Set)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%90%9C%E7%B4%A2"><span class="nav-number">12.</span> <span class="nav-text">高级搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%A0%91%E3%80%81AVL-%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">13.</span> <span class="nav-text">高级树、AVL 树和红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL-%E6%A0%91"><span class="nav-number">13.1.</span> <span class="nav-text">AVL 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">13.2.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">13.3.</span> <span class="nav-text">AVL树和红黑树的对比</span></a></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -286,7 +290,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-09 11:03:43" itemprop="dateModified" datetime="2021-06-09T11:03:43+08:00">2021-06-09</time>
+        <time title="修改时间：2021-06-16 20:25:38" itemprop="dateModified" datetime="2021-06-16T20:25:38+08:00">2021-06-16</time>
       </span>
 
   
@@ -349,6 +353,86 @@
 <p>示例代码-多叉树遍历（递归写法）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">visited = <span class="built_in">set</span>()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node, visited</span>):</span></span><br><span class="line">    <span class="keyword">if</span> node <span class="keyword">in</span> visited: <span class="comment"># terminator</span></span><br><span class="line">        <span class="comment"># already visited</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    visited.add(node)</span><br><span class="line">    <span class="comment"># process current node here.</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> next_node <span class="keyword">in</span> node.children():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_node <span class="keyword">in</span> visited:</span><br><span class="line">            dfs(next_node, visited)</span><br></pre></td></tr></table></figure></p>
 <p>示例代码-树的遍历（非递归写法）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DFS</span>(<span class="params">self, tree</span>):</span></span><br><span class="line">    <span class="keyword">if</span> tree.root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    visited, stack = [], [tree.root]</span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        node = stack.pop()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        process (node)</span><br><span class="line">        nodes = generate_related_nodes(node)</span><br><span class="line">        stack.push(nodes)</span><br><span class="line">    <span class="comment"># other processing work</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
 <h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>示例代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BFS</span>(<span class="params">graph, start, end</span>):</span></span><br><span class="line">    queue = []</span><br><span class="line">    queue.append([start])</span><br><span class="line">    visited.add(start)</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        node = queue.pop()</span><br><span class="line">        visited.add(node)</span><br><span class="line">        process(node)</span><br><span class="line">        nodes = generate_related_nodes(node)</span><br><span class="line">        queue.push(nodes)</span><br><span class="line">    <span class="comment"># other processing work</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><p>贪心算法是一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是全局最好或最优的算法。</p>
+<p>贪心算法与动态规划的不同在于它对每个子问题的解决方案都做出选择，不能回退。动态规划则会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。</p>
+<p><strong>贪心：当下做局部最优判断</strong><br><strong>回溯：能够回退</strong><br><strong>动态规划：最优判断 + 回退</strong></p>
+<p><strong>适用贪心算法的场景</strong><br>简单地说，问题能够分解成子问题来解决，子问题的最优解能递推到最终问题的最优解。这种子问题最优解称为最优子结构。</p>
+<h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><p><strong>二分查找的前提</strong></p>
+<ol>
+<li>目标函数单调性（单调递增或者递减）</li>
+<li>存在上下界（bounded）</li>
+<li>能够通过索引访问（index accessible)</li>
+</ol>
+<p><strong>代码模版</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">left, right = <span class="number">0</span>, <span class="built_in">len</span>(array) - <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> left &lt;= right:</span><br><span class="line">    mid = (left + right) / <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> array[mid] == target:</span><br><span class="line">        <span class="comment"># find the target!!</span></span><br><span class="line">        <span class="keyword">break</span> <span class="keyword">or</span> <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">elif</span> array[mid] &lt; target:</span><br><span class="line">        left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        right = mid - <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>分治, 回溯, 递归, 动态规划的本质：<strong>寻找重复性</strong></p>
+<ul>
+<li>找到最近最简方法，将其拆解成可重复解决的问题</li>
+</ul>
+<p><strong>关键点</strong></p>
+<ul>
+<li>动态规划 和 递归或者分治 没有根本上的区别（关键看有无<strong>最优的子结构</strong>）</li>
+<li>共性：找到重复子问题</li>
+<li>差异性：最优子结构、中途可以淘汰次优解</li>
+</ul>
+<h1 id="字典树和并查集"><a href="#字典树和并查集" class="headerlink" title="字典树和并查集"></a>字典树和并查集</h1><h2 id="字典树-trie"><a href="#字典树-trie" class="headerlink" title="字典树(trie)"></a>字典树(trie)</h2><p><strong>基本结构：</strong><br>字典树，即 Trie 树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。</p>
+<p>它的优点是：最大限度地减少无谓的字符串比较，查询效率比哈希表高。<br><img src="https://i.loli.net/2021/06/15/uIH2pZO1F8dsocv.png" alt="Trie树.PNG"></p>
+<p><strong>基本性质</strong></p>
+<ol>
+<li>结点本身不存完整单词；</li>
+<li>从根结点到某一结点，路径上经过的字符连接起来，为该结点对应的字符串；</li>
+<li>每个结点的所有子结点路径代表的字符都不相同。</li>
+</ol>
+<p><strong>核心思想</strong><br>Trie 树的核心思想是空间换时间。<br>利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。</p>
+<h2 id="并查集-Disjoint-Set"><a href="#并查集-Disjoint-Set" class="headerlink" title="并查集(Disjoint Set)"></a>并查集(Disjoint Set)</h2><p><strong>适用场景：</strong> 组团，配对</p>
+<p><strong>基本操作：</strong></p>
+<ul>
+<li>makeSet(s)：建立一个新的并查集，其中包含 s 个单元素集合。</li>
+<li>unionSet(x, y)：把元素 x 和元素 y 所在的集合合并，要求 x 和 y 所在的集合不相交，如果相交则不合并。</li>
+<li>find(x)：找到元素 x 所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。</li>
+</ul>
+<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><ol>
+<li><p>对初级搜索进行优化：不重复（fibonacci）、剪枝（生成括号问题）</p>
+<blockquote>
+<p>不重复是指去除递归中的重复计算，剪枝是指及时减去次优的分支</p>
+</blockquote>
+</li>
+<li><p>对搜索方向进行优化：双向搜索（前后BFS）、启发式搜索/A*算法（利用优先队列）</p>
+<blockquote>
+<p>A*搜索基于BFS，只不过在队列 popleft() 的时候是按照自定义的优先级进行弹出</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="高级树、AVL-树和红黑树"><a href="#高级树、AVL-树和红黑树" class="headerlink" title="高级树、AVL 树和红黑树"></a>高级树、AVL 树和红黑树</h1><p>为了保证二叉搜索树的二维维度，防止极端情况出现导致树退化为链表，引入平衡二叉树</p>
+<h2 id="AVL-树"><a href="#AVL-树" class="headerlink" title="AVL 树"></a>AVL 树</h2><ol>
+<li>Balance Factor（平衡因子）：是它的左子树的高度减去它的右子树的高度（有时相反）。balance factor = {-1, 0, 1} —-&gt;  <strong>查询复杂度是树的深度，为了保证左右的深度不要差太多，引入平衡因子</strong></li>
+<li>通过旋转操作来进行平衡（四种）: 左旋、右旋、左右旋、右左旋</li>
+</ol>
+<p>下图为平衡的 AVL树，即所有节点的平衡因子均在 -1 和 1 之间：</p>
+<p><img src="https://i.loli.net/2021/06/16/aKkRyQg7w8JZuiB.png" alt="AVL平衡树.PNG"></p>
+<p><strong>AVL 总结:</strong></p>
+<ol>
+<li>平衡二叉搜索树(自平衡)</li>
+<li>每个结点存 balance factor = {-1, 0, 1}</li>
+<li>四种旋转操作</li>
+</ol>
+<p><strong>不足:</strong> 结点需要存储额外信息、且调整次数频繁<br>为了减少 AVL树调整的次数，现实情况是不需要像 AVL树那样严格的平衡 ——&gt; 近似平衡二叉树</p>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树是一种<strong>近似平衡</strong>的二叉搜索树（Binary Search Tree），它能够确保任何一个结点的左右子树的<strong>高度差小于两倍</strong>。具体来说，红黑树是满足如下条件的二叉搜索树：</p>
+<ul>
+<li>每个结点要么是红色，要么是黑色</li>
+<li>根节点是黑色</li>
+<li>每个叶节点（NIL节点，空节点）是黑色的。</li>
+<li>不能有相邻接的两个红色节点</li>
+<li>从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。</li>
+</ul>
+<p><strong>关键性质：</strong><br>从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。</p>
+<p>具体红黑树如下图所示：</p>
+<p><img src="https://i.loli.net/2021/06/16/TGtfdDeHanovym4.png" alt="红黑.PNG"></p>
+<h2 id="AVL树和红黑树的对比"><a href="#AVL树和红黑树的对比" class="headerlink" title="AVL树和红黑树的对比"></a>AVL树和红黑树的对比</h2><ol>
+<li>AVL trees provide <strong>faster lookups</strong> than Red Black Trees because they are <strong>more strictly balanced</strong>.</li>
+<li>Red Black Trees provide <strong>faster insertion and removal operations</strong> than AVL trees as fewer rotations are done due to relatively relaxed balancing.</li>
+<li>AVL trees <strong>store balance factors or heights</strong> with each node, thus requires storage for an integer per node whereas Red Black Tree requires <strong>only 1 bit of information</strong> per node.</li>
+<li>Red Black Trees are used in most of the <strong>language libraries like map, multimap, multisetin C++</strong> whereas AVL trees are used in <strong>databases</strong> where faster retrievals are required.</li>
+</ol>
 
     </div>
 
